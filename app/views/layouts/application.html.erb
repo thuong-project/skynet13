@@ -10,6 +10,15 @@
   </head>
 
   <body>
+    <p>
+      <%= link_to "English", locale:"en" %>
+      <%= link_to "Vietnamese", locale:"vi" %>
+    </p>
+    <% if flash[:errors]%>
+      <% flash[:errors].each do |err| %>
+      <p class="notice"><%= err %></p>
+      <%end%>
+    <% end %>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <%= yield %>

@@ -6,7 +6,7 @@ class User < ApplicationRecord
   validates :username, presence: true, uniqueness: { case_sensitive: false }
   validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true
   #validate :validate_username
-  devise :omniauthable, omniauth_providers: %i[facebook]
+  devise :omniauthable, omniauth_providers: [:facebook,:google_oauth2]
   attr_writer :login
 
   def login
@@ -42,6 +42,7 @@ class User < ApplicationRecord
     end
   end
   
+=begin
   def self.new_with_session(params, session)
     super.tap do |user|
       if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
@@ -49,5 +50,6 @@ class User < ApplicationRecord
       end
     end
   end
-  
+=end
+
 end
