@@ -35,3 +35,6 @@ en:
     login: Enter username or email
     password: Password
     login_submit: Login
+  login: Log in
+  sign_up: Sign up
+  username_or_email: Enter username or email

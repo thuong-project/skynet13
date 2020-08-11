@@ -4,6 +4,11 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable
   validates :username, presence: true, uniqueness: { case_sensitive: false }
+  validates :name,  presence: true, length: { maximum: 50 }
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  validates :email, length: { maximum: 255 },
+                    format: { with: VALID_EMAIL_REGEX },
+                    uniqueness: true
   validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true
   #validate :validate_username
   devise :omniauthable, omniauth_providers: [:facebook,:google_oauth2]
