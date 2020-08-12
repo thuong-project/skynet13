@@ -18,7 +18,7 @@ module Mxh
 
     config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}')]
     # Permitted locales available for the application
-    I18n.available_locales = [:en, :vi]
+    I18n.available_locales = %i[en vi]
     config.i18n.default_locale = :en
   end
 end
