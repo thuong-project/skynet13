@@ -7,13 +7,13 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    added_attrs = [:username, :email, :password, :password_confirmation, :remember_me, :name]
+    added_attrs = %i[username email password password_confirmation remember_me name]
     devise_parameter_sanitizer.permit :sign_up, keys: added_attrs
     devise_parameter_sanitizer.permit :account_update, keys: added_attrs
   end
 
   around_action :switch_locale
- 
+
   def switch_locale(&action)
     locale = params[:locale] || I18n.default_locale
     I18n.with_locale(locale, &action)
@@ -21,23 +21,24 @@ class ApplicationController < ActionController::Base
 
   def set_locale
     locale = params[:locale].to_s.strip.to_sym
-    I18n.locale = I18n.available_locales.include?(locale) ?
-                  locale : I18n.default_locale
+    I18n.locale = if I18n.available_locales.include?(locale)
+                    locale
+                  else
+                    I18n.default_locale
+end
   end
 
   def default_url_options
-    {locale: I18n.locale}
+    { locale: I18n.locale }
   end
-
-  
 
   private
 
   def layout_by_resource
     if devise_controller?
-      "auth"
+      'auth'
     else
-      "application"
+      'application'
     end
   end
 end
