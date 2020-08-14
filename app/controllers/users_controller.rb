@@ -1,17 +1,21 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:home]
+  before_action :set_user, only: %i[show edit update destroy]
 
+
+  # GET /home
+  def home
+    @user = current_user
+  end
   # GET /users
   # GET /users.json
   def index
-    
     @pagy, @users = pagy(User.all, items: 25)
   end
 
   # GET /users/1
   # GET /users/1.json
-  def show
-  end
+  def show; end
 
   # GET /users/new
   def new
@@ -19,8 +23,7 @@ class UsersController < ApplicationController
   end
 
   # GET /users/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /users
   # POST /users.json
@@ -62,14 +65,25 @@ class UsersController < ApplicationController
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user
-      @user = User.find(params[:id])
-    end
+  def search
+    pr = {field: params[:field], value: params[:value]}
+    @rs = User.search pr 
 
-    # Only allow a list of trusted parameters through.
-    def user_params
-      params.require(:user).permit(:name, :email)
+    respond_to do |format|
+      format.html { redirect_to @user }
+      format.js
     end
+  end
+
+  private
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_user
+    @user = User.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def user_params
+    params.require(:user).permit(:name, :email)
+  end
 end

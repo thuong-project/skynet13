@@ -1,0 +1,36 @@
+<%= render layout: 'layouts/application' do%>
+  <header class="container">
+    <div class="row">
+      <div class="col py-5">
+        <% if @page_link.nil? %>
+          <%= link_to "English", locale: "en" %>
+          <%= link_to "Tiếng Việt", locale:"vi"%>
+        <% else %>
+          <%= link_to "English", '/en/'+ @page_link %>
+          <%= link_to "Tiếng Việt", '/vi/'+@page_link %>
+        <% end%>
+      </div>
+    </div>
+  </header>
+  <section class="container">
+    <div class="row">
+      <div class="col">
+        <%= yield %>
+      </div>
+      <div class="col">
+        <h2 class="text-center">
+          <%= t :greeting%>
+        </h2>
+        <div class="d-flex justify-content-center pt-5">
+          <%= image_tag 'fakebook.png' %>
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer class="container">
+    <div class="row">
+      <div class="col">
+      </div>
+    </div>
+  </footer>
+<% end %>
