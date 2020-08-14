@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
-  before_action :authenticate_user!
+  # before_action :authenticate_user!
+  protect_from_forgery unless: -> { request.format.js? }
   before_action :set_locale
   layout :layout_by_resource
 

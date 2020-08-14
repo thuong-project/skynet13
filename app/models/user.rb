@@ -14,6 +14,8 @@ class User < ApplicationRecord
   devise :omniauthable, omniauth_providers: %i[facebook google_oauth2]
   attr_writer :login
 
+  
+
   def login
     @login || username || email
   end
@@ -52,4 +54,24 @@ class User < ApplicationRecord
   #       end
   #     end
   #   end
+
+  # mapping string to filed name
+  FIELD = {"name" => :name, "username" => :username, "email" => :email}
+  def self.search data
+    rs = []
+
+    field = FIELD[data[:field]]
+    return nil if field.nil?
+
+    value = data[:value]
+    
+    if  field == :name
+      rs = User.where("name LIKE ?", "%#{value}%")
+    else
+      rs << User.find_by({field => value})
+    end
+
+    rs
+  end
+
 end
