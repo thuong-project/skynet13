@@ -1,11 +1,16 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!, only: [:home]
   before_action :set_user, only: %i[show edit update destroy]
 
+
+  # GET /home
+  def home
+    @user = current_user
+  end
   # GET /users
   # GET /users.json
   def index
-    # @users = User.all
-    @user = current_user
+    @users = User.all
   end
 
   # GET /users/1
@@ -57,6 +62,16 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def search
+    pr = {field: params[:field], value: params[:value]}
+    @rs = User.search pr 
+
+    respond_to do |format|
+      format.html { redirect_to @user }
+      format.js
     end
   end
 

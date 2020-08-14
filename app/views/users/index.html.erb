@@ -1,5 +1,56 @@
-<h1>Users#index</h1>
-<p>Find me in app/views/users/index.html.erb</p>%
-<%= @user.to_json %>
+<p id="notice"><%= notice %></p>
+<h1>Users</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Username</th>
+      <th>Email</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.id %></td>
+        <td><%= user.name %></td>
+        <td><%= user.username %></td>
+        <td><%= user.email %></td>
+        <td><%= link_to 'Show', user %></td>
+        <td><%= link_to 'Edit', edit_user_path(user) %></td>
+        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 <br>
-<%= button_to "log out", destroy_user_session_path, :method => :delete %>
+<%= link_to 'New User', new_user_path %>
+<form action="/search.js" method="get" class="form-inline" data-remote="true" data-type="script">
+
+  <label for="id" class="mr-2 badge badge-primary p-2">Search by: </label>
+
+  <div id="field">
+    <div class="form-check-inline">
+      <label class="form-check-label">
+        <input type="radio" class="form-check-input" name="field">name
+      </label>
+    </div>
+    <div class="form-check-inline">
+      <label class="form-check-label">
+        <input type="radio" class="form-check-input" name="field">username
+      </label>
+    </div>
+    <div class="form-check-inline disabled">
+      <label class="form-check-label">
+        <input type="radio" class="form-check-input" name="field">email
+      </label>
+    </div>
+  </div>
+
+  <input type="text" class="form-control " placeholder="Enter string to search" id="value" name="value">
+  <button type="submit" class="btn btn-primary ml-2">Search</button>
+</form>
+
+<div id="rs_search"></div>
+
+<%= link_to "Get Books", "/search.js", data: {remote: true, type: "script"} %>
