@@ -30,4 +30,11 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  greeting: 'Wellcome to Fakebook social network!'
+  label:
+    login: Enter username or email
+    password: Password
+    login_submit: Login
+  login: Log in
+  sign_up: Sign up
+  username_or_email: Enter username or email

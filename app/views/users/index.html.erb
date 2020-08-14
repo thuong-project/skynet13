@@ -12,15 +12,17 @@
   <thead>
     <tr>
       <th>Name</th>
+      <th>Username</th>
       <th>Email</th>
       <th colspan="3"></th>
     </tr>
   </thead>
-
   <tbody>
     <% @users.each do |user| %>
       <tr>
+        <td><%= user.id %></td>
         <td><%= user.name %></td>
+        <td><%= user.username %></td>
         <td><%= user.email %></td>
         <td><%= link_to 'Show', user %></td>
         <td><%= link_to 'Edit', edit_user_path(user) %></td>
@@ -34,4 +36,31 @@
 
 <%= link_to 'New User', new_user_path %>
 <%== pagy_bootstrap_nav(@pagy) %>
+
 <% end %>
+<br>
+<%= link_to 'New User', new_user_path %>
+<form action="/search.js" method="get" class="form-inline" data-remote="true">
+
+  <label for="id" class="mr-2 badge badge-primary p-2">Search by: </label>
+
+  <div id="field">
+    <div class="form-check-inline">
+      <label class="form-check-label">
+        <input type="radio" class="form-check-input" name="field" value="name">name
+      </label>
+    </div>
+    <div class="form-check-inline disabled">
+      <label class="form-check-label">
+        <input type="radio" class="form-check-input" name="field" value="email">email
+      </label>
+    </div>
+  </div>
+
+  <input type="text" class="form-control " placeholder="Enter string to search" id="value" name="value">
+  <button type="submit" class="btn btn-primary ml-2">Search</button>
+</form>
+
+<div id="rs_search">
+
+</div>

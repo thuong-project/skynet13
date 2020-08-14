@@ -1,0 +1,9 @@
+vi:
+  greeting: 'Chào mừng đến với Mạng xã hội Fakebook!'
+  label:
+    login: Nhập username hoặc email
+    password: Mật khẩu
+    login_submit: Đăng nhập
+  login: Đăng nhập
+  sign_up: Đăng ký
+  username_or_email: Nhập username hoặc email

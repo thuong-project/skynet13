@@ -2,7 +2,24 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 /* Show it is fixed to the top */
+
 body {
+  background-color: $light;
   min-height: 75rem;
   padding-top: 4.5rem;
+}
+
+input[type="submit"] {
+  @extend .btn;
+  @extend .btn-primary;
+  margin-top: 7px;
+}
+
+
+h2 {
+  color: $primary
+}
+
+div.field_with_errors {
+  display: inline;
 }
