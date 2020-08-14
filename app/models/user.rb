@@ -71,6 +71,7 @@ class User < ApplicationRecord
       rs << User.find_by({field => value})
     end
 
+    p rs
     rs
   end
 
