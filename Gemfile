@@ -38,6 +38,8 @@ gem 'devise-i18n'
 
 gem 'dotenv-rails'
 
+gem "pagy"
+
 # For 6.0.0 or higher
 
 group :development, :test do
