@@ -1,12 +1,17 @@
 class ApplicationController < ActionController::Base
+  before_action :set_locale
   include Pagy::Backend
   before_action :configure_permitted_parameters, if: :devise_controller?
-  # before_action :authenticate_user!
+  before_action :authenticate_user!
   protect_from_forgery unless: -> { request.format.js? }
-  before_action :set_locale
+  
   layout :layout_by_resource
 
   protected
+
+  def after_sign_in_path_for(resource)
+    root_path #your path
+  end
 
   def configure_permitted_parameters
     added_attrs = %i[username email password password_confirmation remember_me name]
@@ -27,7 +32,7 @@ class ApplicationController < ActionController::Base
                     locale
                   else
                     I18n.default_locale
-end
+                  end
   end
 
   def default_url_options
