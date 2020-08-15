@@ -67,7 +67,7 @@ class UsersController < ApplicationController
 
   def search
     pr = {field: params[:field], value: params[:value]}
-    @rs = User.search pr 
+    @pagy, @users = pagy(User.search, items: 25)
 
     respond_to do |format|
       format.html { redirect_to @user }
