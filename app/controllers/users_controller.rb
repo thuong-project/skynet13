@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
 
   layout 'home'
-  before_action :authenticate_user!, only: [:home]
   before_action :set_user, only: %i[show edit update destroy]
 
 
