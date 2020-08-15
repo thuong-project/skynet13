@@ -59,6 +59,7 @@ class User < ApplicationRecord
   FIELD = {"name" => :name, "username" => :username, "email" => :email}
   def self.search data
 
+    
     field = FIELD[data[:field]]
     return nil if field.nil?
     value = data[:value]

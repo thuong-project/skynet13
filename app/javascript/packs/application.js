@@ -6,7 +6,7 @@ require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
-// import 'bootstrap'
+//import 'bootstrap'
 // import "../stylesheet/application.scss"
 
 //import "../stylesheets/application.scss"

@@ -1,29 +1,43 @@
   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-    <div class="container">
-      <a class="navbar-brand" href="#">Fakebook.com</a>
-      <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="navbar-collapse collapse" id="navbarCollapse" style="">
-        <form class="form-inline mt-2 mt-md-0 ">
-          <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#">Disabled</a>
-          </li>
-        </ul>
-      </div>
+  <div class="container">
+    <a class="navbar-brand" href="#">Fakebook.com</a>
+    <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-collapse collapse" id="navbarCollapse" style="">
+      <form action="/search.js" method="get" class="form-inline mt-2 mt-md-0" data-remote="true">
+        <span class="mr-2 badge badge-primary p-2">Search by: </span>
+       
+          <div class="form-check-inline">
+            <label class="form-check-label text-light">
+              <input type="radio" class="form-check-input" name="field" value="name">name
+            </label>
+          </div>
+          <div class="form-check-inline disabled">
+            <label class="form-check-label text-light">
+              <input type="radio" class="form-check-input" name="field" value="email">email
+            </label>
+          </div>
+        
+      
+        
+        <input type="text" class="form-control mr-sm-2" placeholder="Enter string to search" id="value" name="value">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#">Disabled</a>
+        </li>
+      </ul>
     </div>
-  </nav>
-  <main role="main" class="container">
-    <%= yield %>
-  </main>
-  
+  </div>
+</nav>
+<main role="main" class="container">
+  <%= yield %>
+</main>
