@@ -1,16 +1,17 @@
+  <% content_for :content do %>
   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
   <div class="container">
-    <a class="navbar-brand" href="#">Fakebook.com</a>
+    <a class="navbar-brand" href="/users">Fakebook.com</a>
     <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="navbar-collapse collapse" id="navbarCollapse" style="">
-      <form action="/search.js" method="get" class="form-inline mt-2 mt-md-0" data-remote="true">
+      <form action="/search" method="get" class="form-inline mt-2 mt-md-0">
         <span class="mr-2 badge badge-primary p-2">Search by: </span>
        
           <div class="form-check-inline">
             <label class="form-check-label text-light">
-              <input type="radio" class="form-check-input" name="field" value="name">name
+              <input type="radio" class="form-check-input" name="field" value="name" checked="checked">name
             </label>
           </div>
           <div class="form-check-inline disabled">
@@ -41,3 +42,5 @@
 <main role="main" class="container">
   <%= yield %>
 </main>
+<% end %>
+<%= render template: "layouts/application"%>

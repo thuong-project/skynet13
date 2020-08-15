@@ -64,7 +64,9 @@ class User < ApplicationRecord
     return nil if field.nil?
     value = data[:value]
   
-    User.where('? LIKE ?', field.to_s, "%#{value}%")
+    users = User.where("#{field} LIKE ?" , "%#{value}%")
+    #puts users
+    users
   end
 
 end

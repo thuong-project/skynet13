@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+
+  layout 'home'
   before_action :authenticate_user!, only: [:home]
   before_action :set_user, only: %i[show edit update destroy]
 
@@ -68,11 +70,6 @@ class UsersController < ApplicationController
   def search
     pr = {field: params[:field], value: params[:value]}
     @pagy, @users = pagy(User.search(pr), items: 25)
-
-    respond_to do |format|
-      format.html { redirect_to @user }
-      format.js
-    end
   end
 
   private
