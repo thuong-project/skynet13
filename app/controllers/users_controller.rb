@@ -54,7 +54,7 @@ class UsersController < ApplicationController
       end
     end
   end
-
+  
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
@@ -67,7 +67,7 @@ class UsersController < ApplicationController
 
   def search
     pr = {field: params[:field], value: params[:value]}
-    @pagy, @users = pagy(User.search, items: 25)
+    @pagy, @users = pagy(User.search(pr), items: 25)
 
     respond_to do |format|
       format.html { redirect_to @user }

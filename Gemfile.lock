@@ -124,7 +124,6 @@ GEM
     nio4r (2.5.2)
     nokogiri (1.10.10)
       mini_portile2 (~> 2.4.0)
-    pagy (3.8.3)
     oauth2 (1.4.4)
       faraday (>= 0.8, < 2.0)
       jwt (>= 1.0, < 3.0)
@@ -272,12 +271,10 @@ DEPENDENCIES
   bootsnap (>= 1.4.2)
   byebug
   capybara (>= 2.15)
-  faker
-  jbuilder (~> 2.7)
-  listen (~> 3.2)
   devise
   devise-i18n
   dotenv-rails
+  faker
   jbuilder (~> 2.7)
   listen (~> 3.2)
   omniauth-facebook
