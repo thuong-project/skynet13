@@ -58,21 +58,12 @@ class User < ApplicationRecord
   # mapping string to filed name
   FIELD = {"name" => :name, "username" => :username, "email" => :email}
   def self.search data
-    rs = []
 
     field = FIELD[data[:field]]
     return nil if field.nil?
-
     value = data[:value]
-    
-    if  field == :name
-      rs = User.where("name LIKE ?", "%#{value}%")
-    else
-      rs << User.find_by({field => value})
-    end
-
-    p rs
-    rs
+  
+    User.where('? LIKE ?', field.to_s, "%#{value}%")
   end
 
 end
