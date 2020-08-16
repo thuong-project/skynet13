@@ -1,12 +1,39 @@
 class UsersController < ApplicationController
 
   layout 'home'
-  before_action :set_user, only: %i[show edit update destroy]
+  before_action :set_user, only: %i[show edit update destroy follow]
 
 
   # GET /home
   def home
     @user = current_user
+  end
+
+  def following
+    user = User.find(params[:id])
+    @pagy, @users = pagy(user.following, items: 25, link_extra: 'data-remote="true" data-type="script"')
+    @heading = 'following'
+    respond_to do |format|
+      format.js {render :list_follow}
+    end
+  end
+
+  def followers
+    user = User.find(params[:id])
+    @pagy, @users= pagy(user.followers, items: 25,link_extra: 'data-remote="true" data-type="script"')
+    @heading = 'followers'
+    respond_to do |format|
+      format.html
+      format.js {render :list_follow}
+    end
+  end
+
+  def follow
+    if current_user.following? @user
+      current_user.unfollow(@user)
+    else
+      current_user.follow(@user)
+    end
   end
   # GET /users
   # GET /users.json
@@ -16,7 +43,9 @@ class UsersController < ApplicationController
 
   # GET /users/1
   # GET /users/1.json
-  def show; end
+  def show 
+    render :home
+  end
 
   # GET /users/new
   def new

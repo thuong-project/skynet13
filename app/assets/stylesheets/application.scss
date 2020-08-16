@@ -22,7 +22,7 @@
   padding-top: 4.5rem;
 }
 
-input[type="submit"] {
+.actions input[type="submit"] {
   @extend .btn;
   @extend .btn-primary;
   margin-top: 7px;
@@ -31,7 +31,6 @@ input[type="submit"] {
 
 h2 {
   color: $primary;
-  color: blue;
 }
 
 div.field_with_errors {

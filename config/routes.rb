@@ -11,8 +11,14 @@ Rails.application.routes.draw do
     end
 
     resources :posts
-    resources :users
+    resources :users do
+      member do
+        get :following, :followers
+        post :follow
+      end
+    end
     get "/search", to: 'users#search'
+    
   end
 
   devise_for :users, path: '', path_names: { sign_in: 'login', sign_out: 'logout', password: 'password', confirmation: 'verification', unlock: 'unblock', registration: 'register', sign_up: 'sign_up' },

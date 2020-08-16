@@ -1,23 +1,37 @@
 <div>
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>ID:</strong>
-  <%= @user.id %>
-</p>
-<p>
-  <strong>Name:</strong>
-  <%= @user.name %>
-</p>
-
-<p>
-  <strong>Username:</strong>
-  <%= @user.username %>
-</p>
-
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
-
+  <p id="notice"><%= notice %></p>
+  <h2>Profile</h2>
+  <p>
+    <strong>ID:</strong>
+    <%= @user.id %>
+  </p>
+  <p>
+    <strong>Name:</strong>
+    <%= @user.name %>
+  </p>
+  <p>
+    <strong>Username:</strong>
+    <%= @user.username %>
+  </p>
+  <p>
+    <strong>Email:</strong>
+    <%= @user.email %>
+  </p>
+</div>
+<div class="d-inline-block">
+  <a href="<%= following_user_path(@user) %>" class="" data-remote="true" data-type="script">
+    <div id="count_following"><%= @user.following.count %></div>
+    <div>following</div>
+  </a>
+</div>
+<div class="d-inline-block ml-2">
+  <a href="<%= followers_user_path(@user) %>" class="" data-remote="true" data-type="script">
+    <div id="count_followers"><%= @user.followers.count %></div>
+    <div>followers</div>
+  </a>
+</div>
+<% if @user.id !=  current_user.id%>
+  <%= render 'form_follow' %>
+<% end %>
+<div class="mt-5" id="follow">
 </div>
