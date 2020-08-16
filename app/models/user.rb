@@ -14,17 +14,16 @@ class User < ApplicationRecord
   devise :omniauthable, omniauth_providers: %i[facebook google_oauth2]
   attr_writer :login
 
-  has_many :active_relationships, class_name: "Relationship",
-                                  foreign_key: "follower_id",
+  has_many :active_relationships, class_name: 'Relationship',
+                                  foreign_key: 'follower_id',
                                   dependent: :destroy
   has_many :following, through: :active_relationships, source: :followed
 
-  has_many :passive_relationships, class_name:  "Relationship",
-                                   foreign_key: "followed_id",
-                                   dependent:   :destroy
+  has_many :passive_relationships, class_name: 'Relationship',
+                                   foreign_key: 'followed_id',
+                                   dependent: :destroy
   has_many :followers, through: :passive_relationships, source: :follower
   has_many :posts, dependent: :destroy
-  
 
   def login
     @login || username || email
@@ -66,16 +65,15 @@ class User < ApplicationRecord
   #   end
 
   # mapping string to filed name
-  FIELD = {"name" => :name, "username" => :username, "email" => :email}
-  def self.search data
-
-    
+  FIELD = { 'name' => :name, 'username' => :username, 'email' => :email }.freeze
+  def self.search(data)
     field = FIELD[data[:field]]
     return nil if field.nil?
+
     value = data[:value]
-  
-    users = User.where("#{field} LIKE ?" , "%#{value}%")
-    #puts users
+
+    users = User.where("#{field} LIKE ?", "%#{value}%")
+    # puts users
     users
   end
 
@@ -93,5 +91,4 @@ class User < ApplicationRecord
   def following?(other_user)
     following.include?(other_user)
   end
-
 end

@@ -4,16 +4,16 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :authenticate_user!
   protect_from_forgery unless: -> { request.format.js? }
-  
+
   layout :layout_by_resource
 
   protected
 
-  def after_sign_in_path_for(resource)
-    newsfeed_user_path(current_user) #your path
+  def after_sign_in_path_for(_resource)
+    newsfeed_user_path(current_user) # your path
   end
 
-  def after_sign_out_path_for(resource)
+  def after_sign_out_path_for(_resource)
     new_user_session_path
   end
 
