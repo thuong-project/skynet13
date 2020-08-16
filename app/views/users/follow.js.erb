@@ -1,0 +1,4 @@
+$("#follow-toggle").html("<%= escape_javascript(render 'form_follow')%>");
+$("#count_following").html("<%= @user.following.count%>");
+$("#count_followers").html("<%= @user.followers.count%>");
+

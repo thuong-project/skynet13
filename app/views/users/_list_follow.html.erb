@@ -1,0 +1,25 @@
+<div>
+    <h2><%= heading %></h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</>
+          <th>Email</th>
+          <th>ID</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% users.each do |user| %>
+          <tr>
+            <td><%= link_to user.name, user_path(user) %></td>
+            <td><%= user.email %></td>
+            <td><%= user.id %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <br>
+    
+    <%== pagy_bootstrap_nav(pagy) %>
+  </div>
