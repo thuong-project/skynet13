@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   layout 'home'
-  before_action :set_user, only: %i[show edit update destroy follow]
+  before_action :set_user, only: %i[show edit update destroy follow posts following followers follow]
 
 
   # GET /home
@@ -9,9 +9,29 @@ class UsersController < ApplicationController
     @user = current_user
   end
 
+  def newsfeed
+    following_ids = "SELECT followed_id FROM relationships
+                     WHERE follower_id = :user_id"
+    @rs = Post.where("user_id IN (#{following_ids})
+                     OR user_id = :user_id", user_id: current_user.id)
+    @pagy, @posts = pagy(@rs)
+    render 'posts/newsfeed'
+  end
+
+  def create_post
+    current_user.posts.create(content: params[:content])
+    redirect_to newsfeed_user_url(current_user)
+  end
+
+  def posts
+    @pagy, @posts = pagy(@user.posts, link_extra: 'data-remote="true" data-type="script"')
+    respond_to do |format|
+      format.js {render 'posts/list_posts'}
+    end
+  end
+
   def following
-    user = User.find(params[:id])
-    @pagy, @users = pagy(user.following, items: 25, link_extra: 'data-remote="true" data-type="script"')
+    @pagy, @users = pagy(@user.following, link_extra: 'data-remote="true" data-type="script"')
     @heading = 'following'
     respond_to do |format|
       format.js {render :list_follow}
@@ -19,8 +39,7 @@ class UsersController < ApplicationController
   end
 
   def followers
-    user = User.find(params[:id])
-    @pagy, @users= pagy(user.followers, items: 25,link_extra: 'data-remote="true" data-type="script"')
+    @pagy, @users= pagy(@user.followers, link_extra: 'data-remote="true" data-type="script"')
     @heading = 'followers'
     respond_to do |format|
       format.html
@@ -29,6 +48,7 @@ class UsersController < ApplicationController
   end
 
   def follow
+   
     if current_user.following? @user
       current_user.unfollow(@user)
     else
@@ -38,7 +58,7 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @pagy, @users = pagy(User.all, items: 25)
+    @pagy, @users = pagy(User.all)
   end
 
   # GET /users/1
@@ -97,7 +117,7 @@ class UsersController < ApplicationController
 
   def search
     pr = {field: params[:field], value: params[:value]}
-    @pagy, @users = pagy(User.search(pr), items: 25)
+    @pagy, @users = pagy(User.search(pr))
   end
 
   private

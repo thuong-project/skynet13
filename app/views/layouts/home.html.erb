@@ -8,10 +8,10 @@
       <div class="navbar-collapse collapse" id="navbarCollapse">
       <ul class="navbar-nav mr-5"> 
         <li class="nav-item">
-          <a class="nav-link text-white" href="#">News Feed</a>
+          <a class="nav-link text-white" href="<%= newsfeed_user_path(current_user) %>">News Feed</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white" href="<%= root_path%>">My Profile</a>
+          <a class="nav-link text-white" href="<%= user_path(current_user)%>">My Profile</a>
         </li>
         <li class="nav-item">
           <a class="nav-link text-white" href="<%= users_path%>">All Users</a>
