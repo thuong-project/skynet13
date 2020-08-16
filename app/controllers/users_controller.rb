@@ -1,8 +1,6 @@
 class UsersController < ApplicationController
-
   layout 'home'
   before_action :set_user, only: %i[show edit update destroy follow posts following followers follow]
-
 
   # GET /home
   def home
@@ -26,7 +24,7 @@ class UsersController < ApplicationController
   def posts
     @pagy, @posts = pagy(@user.posts, link_extra: 'data-remote="true" data-type="script"')
     respond_to do |format|
-      format.js {render 'posts/list_posts'}
+      format.js { render 'posts/list_posts' }
     end
   end
 
@@ -34,27 +32,27 @@ class UsersController < ApplicationController
     @pagy, @users = pagy(@user.following, link_extra: 'data-remote="true" data-type="script"')
     @heading = 'following'
     respond_to do |format|
-      format.js {render :list_follow}
+      format.js { render :list_follow }
     end
   end
 
   def followers
-    @pagy, @users= pagy(@user.followers, link_extra: 'data-remote="true" data-type="script"')
+    @pagy, @users = pagy(@user.followers, link_extra: 'data-remote="true" data-type="script"')
     @heading = 'followers'
     respond_to do |format|
       format.html
-      format.js {render :list_follow}
+      format.js { render :list_follow }
     end
   end
 
   def follow
-   
     if current_user.following? @user
       current_user.unfollow(@user)
     else
       current_user.follow(@user)
     end
   end
+
   # GET /users
   # GET /users.json
   def index
@@ -63,7 +61,7 @@ class UsersController < ApplicationController
 
   # GET /users/1
   # GET /users/1.json
-  def show 
+  def show
     render :home
   end
 
@@ -104,7 +102,7 @@ class UsersController < ApplicationController
       end
     end
   end
-  
+
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
@@ -116,7 +114,7 @@ class UsersController < ApplicationController
   end
 
   def search
-    pr = {field: params[:field], value: params[:value]}
+    pr = { field: params[:field], value: params[:value] }
     @pagy, @users = pagy(User.search(pr))
   end
 
