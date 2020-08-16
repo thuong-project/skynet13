@@ -1,4 +1,6 @@
-$("#follow-toggle").html("<%= escape_javascript(render 'form_follow')%>");
-$("#count_following").html("<%= @user.following.count%>");
-$("#count_followers").html("<%= @user.followers.count%>");
+$("#follow-toggle-<%= @user.id %>").html("<%= escape_javascript(render 'form_follow')%>");
+$("#count_following-<%= @user.id %>").html("<%= @user.following.count%>");
+$("#count_followers-<%= @user.id %>").html("<%= @user.followers.count%>");
+$("#count_following-<%= current_user.id %>").html("<%= current_user.following.count%>");
+$("#count_followers-<%= current_user.id %>").html("<%= current_user.followers.count%>");
 
