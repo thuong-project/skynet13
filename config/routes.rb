@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   scope '(:locale)', locale: /#{I18n.available_locales.join("|")}/ do
     devise_for :users, path: '', path_names: { sign_in: 'login', sign_out: 'logout', password: 'password', confirmation: 'verification', unlock: 'unblock', registration: 'register', sign_up: 'sign_up' },
-                       controllers: { registrations: 'registrations' }, skip: :omniauth_callbacks
+                       controllers: { registrations: 'registrations', sessions: 'users/sessions' }, skip: :omniauth_callbacks
 
     devise_scope :user do
       get 'register', to: 'devise/registrations#new', as: :sign_up
