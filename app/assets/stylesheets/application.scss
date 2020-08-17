@@ -36,3 +36,20 @@ h2 {
 div.field_with_errors {
   display: inline;
 }
+
+.online {
+  
+  padding:8px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  background-color: $success;
+  border-color: gray;
+  border-width: 2px;
+}
+.offline {
+  @extend .online;
+  background-color:gray;
+}
+.table td {
+  vertical-align: middle;
+}

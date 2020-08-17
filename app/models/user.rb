@@ -91,4 +91,6 @@ class User < ApplicationRecord
   def following?(other_user)
     following.include?(other_user)
   end
+
+  after_update_commit {AppearanceBroadcastJob.perform_later self}
 end
