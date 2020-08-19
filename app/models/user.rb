@@ -25,6 +25,11 @@ class User < ApplicationRecord
   has_many :followers, through: :passive_relationships, source: :follower
   has_many :posts, dependent: :destroy
 
+  after_update :broadcast_status, if: :saved_change_to_online?
+
+  has_many :messages
+  has_many :conversations, foreign_key: :sender_id
+
   def login
     @login || username || email
   end
@@ -92,5 +97,7 @@ class User < ApplicationRecord
     following.include?(other_user)
   end
 
-  after_update_commit {AppearanceBroadcastJob.perform_later self}
+  def broadcast_status
+    AppearanceBroadcastJob.perform_later self
+  end
 end

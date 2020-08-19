@@ -1,8 +1,8 @@
 # Generate a bunch of additional users.
 50.times do |n|
   name = Faker::Name.name
-  username = "user#{n}"
-  email = "#{n}ckpvthuongft@gmail.com"
+  username = "user#{n+1}"
+  email = "#{n+1}ckpvthuongft@gmail.com"
   password = '111111'
 
   user = User.create!(
@@ -29,3 +29,18 @@ users = User.order(:created_at).take(6)
   content = Faker::Lorem.sentence(word_count: 5)
   users.each { |user| user.posts.create!(content: content) }
 end
+
+  users = User.order(:created_at).take(7)
+  6.times { 
+    |n| 
+     sender = users[n]
+     recipient = users[n+1]
+     cvs = Conversation.get(sender.id, recipient.id)
+     cvs.messages.create!(body: "hello #{recipient.name}, my name is #{sender.name}", user_id: sender.id)
+
+     sender = users[n+1]
+     recipient = users[n]
+     
+     cvs.messages.create!(body: "hello #{recipient.name}, my name is #{sender.name}", user_id: sender.id)
+  }
+
