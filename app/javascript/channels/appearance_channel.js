@@ -1,18 +1,20 @@
 import consumer from "./consumer"
+
 consumer.subscriptions.create({
   channel:'AppearanceChannel'
  }, {
   received: function(data) {
     var user = JSON.parse(data)
     if (user.online === true){
-      $(userImgIdConstructor(user)).attr('class', 'online');
+      $(element({user_id: user.id, cssClass: '.icon-status'})).attr('class','icon-status online');
+      
     };
     if (user.online === false){
-      $(userImgIdConstructor(user)).attr('class', 'offline');
+      $(element({user_id: user.id, cssClass: '.icon-status'})).attr('class','icon-status offline');
     };
   }
 });
 
-var userImgIdConstructor = function(user){
-  return "#" + user.id + "-status";
+var element = function(e){
+  return ".user-" + e.user_id + ' ' + e.cssClass;
 }

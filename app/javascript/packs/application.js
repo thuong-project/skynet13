@@ -7,14 +7,75 @@ require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 import 'bootstrap'
-// import "../stylesheet/application.scss"
-
-//import "../stylesheets/application.scss"
+import consumer from '../channels/consumer'
 
 
-// Uncomment to copy all static images under ../images to the output folder and reference
-// them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
-// or the `imagePath` JavaScript helper below.
-//
-// const images = require.context('../images', true)
-// const imagePath = (name) => images(name, true)
+
+document.addEventListener("turbolinks:load", function() {
+
+  var App_subscriptions = {};
+
+  $('#chat-bar li').click(function(){
+    const recipient_id = $(this).attr('user_id');
+    $.ajax({
+      url: '/conversation',
+      data: {recipient_id: recipient_id},
+      method: 'get'
+    }).done(function(data){
+
+      var chatBoxElement = $(data);
+      addEventForChatBox(chatBoxElement);
+      createConversationChannel(chatBoxElement);
+
+      chatBoxElement.insertBefore('#chat-box-markup');
+      renderListChatBox();
+    })  
+});
+
+  var addEventForChatBox = function(chatBoxElement){
+    
+      chatBoxElement.find('.close').click(function(){
+      chatBoxElement.remove();
+      renderListChatBox();
+
+    });
+  }
+
+  var renderListChatBox = function () {
+    $(".chat-box").each(function (index) {
+      $(this).css({ right: index * 20.5 + 16.66667+ "%" });
+    });
+  };
+
+ 
+
+  var createConversationChannel = function(chatBoxElement){
+  
+  var conversation_id = chatBoxElement.attr('conversation_id');
+
+  consumer.subscriptions.create({
+  channel:'ConversationChannel',
+  conversation_id: conversation_id
+ }, {
+  received: function(data) {
+    console.log(consumer);
+    console.log(App);
+    var messages = JSON.parse(data.messages)
+    console.log(messages);
+    renderMessages(chatBoxElement,messages )
+  }
+});
+
+}
+
+  var renderMessages = function(chatBoxElement,messages){
+
+    messages.forEach(function(mess, index, messages){
+      var str = `<li class="message">${mess.user_id + ': ' + mess.body}<li>`;
+      $(str).insertBefore(chatBoxElement.find('.message-markup'));
+    })
+  }
+
+});
+
+

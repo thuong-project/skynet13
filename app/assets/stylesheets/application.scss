@@ -14,11 +14,13 @@
  *= require_self
 
  */
- @import "bootstrap/scss/bootstrap";
-
- body {
+@import "bootstrap/scss/bootstrap";
+html,
+body {
+  height: 100%;
+}
+body {
   background-color: $light;
-  min-height: 75rem;
   padding-top: 4.5rem;
 }
 
@@ -28,7 +30,6 @@
   margin-top: 7px;
 }
 
-
 h2 {
   color: $primary;
 }
@@ -37,19 +38,51 @@ div.field_with_errors {
   display: inline;
 }
 
-.online {
-  
-  padding:8px;
+.icon-status {
+  width: 16px;
+  height: 16px;
   box-sizing: border-box;
   border-radius: 50%;
-  background-color: $success;
-  border-color: gray;
   border-width: 2px;
+  &.online {
+    background-color: $success;
+  }
+  &.offline {
+    background-color: $danger;
+  }
 }
-.offline {
-  @extend .online;
-  background-color:gray;
+
+.chat-bar {
+  overflow: hidden;
+  overflow-y: scroll;
+  margin-top: auto;
+  margin-bottom: auto;
+  position: fixed;
+  overflow-x: scroll;
+  margin-bottom: 20px;
+  .username {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .chat-box{
+    width: 20%;
+    height: 40%;
+    position: fixed;
+    bottom: 0px;
+    right: 16.66667%;
+    border-style: solid;
+    border-width: 0px 1px;
+    border-color:$primary;
+    background-color: white;
+    
+    .header{
+      height: 15%;
+      
+    }
+  }
 }
+
 .table td {
   vertical-align: middle;
 }

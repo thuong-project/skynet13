@@ -1,0 +1,15 @@
+<div class="chat-box" user_id="<%= @conversation.recipient_id %>" conversation_id="<%=@conversation.id%>">
+  <div class="header d-flex align-items-center bg-primary justify-content-between">
+    <div>
+      <a class="text-white ml-2 " href="<%= user_path(@recipient) %>"><%= @recipient.name %></a>
+      <span class="icon-status ml-2 <%= @recipient.online ? 'online' : 'offline' %>"></span>
+    </div>
+    <button class="close mr-3">
+      <span>&times;</span>
+    </button>
+  </div>
+  <ul class="list-messages">
+   
+    <li class="message-markup"></li>
+  </ul>
+</div>

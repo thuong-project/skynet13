@@ -17,8 +17,12 @@ Rails.application.routes.draw do
         get :newsfeed
         post :create_post
       end
+      
     end
     get '/search', to: 'users#search'
+
+    get '/conversation', to: 'conversations/conversations#show'
+    post '/conversation', to: 'conversations/conversations#create_message'
   end
 
   devise_for :users, skip: %i[session password registration], controllers: { omniauth_callbacks: 'omniauth_callbacks' }

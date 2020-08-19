@@ -2,5 +2,5 @@
 // You can generate new channels where WebSocket features live using the `rails generate channel` command.
 
 import { createConsumer } from "@rails/actioncable"
-
-export default createConsumer()
+var consumer = createConsumer()
+export default consumer
