@@ -15,7 +15,34 @@
 
  */
 @import "bootstrap/scss/bootstrap";
-html,
+
+div,ul,li,ol,span,
+p,label,input,textarea, button{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+} 
+
+textarea:hover, 
+input:hover, 
+textarea:active, 
+input:active, 
+textarea:focus, 
+input:focus,
+button:focus,
+button:active,
+button:hover,
+label:focus,
+.btn:active,
+.btn.active
+{
+    outline:0px !important;
+    -webkit-appearance:none;
+    box-shadow: none !important;
+}
+
+$cus_blue: #2196f3;
+
 body {
   height: 100%;
 }
@@ -39,16 +66,16 @@ div.field_with_errors {
 }
 
 .icon-status {
-  width: 16px;
-  height: 16px;
+  width: 14px;
+  height: 14px;
   box-sizing: border-box;
   border-radius: 50%;
-  border-width: 2px;
+
   &.online {
     background-color: $success;
   }
   &.offline {
-    background-color: $danger;
+    background-color: $gray-500;
   }
 }
 
@@ -60,25 +87,82 @@ div.field_with_errors {
   position: fixed;
   overflow-x: scroll;
   margin-bottom: 20px;
+  right: 0;
+  width: 200px;
   .username {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
-  .chat-box{
-    width: 20%;
-    height: 40%;
+  .chat-box {
+    width: 250px;
+    height: 300px;
     position: fixed;
     bottom: 0px;
     right: 16.66667%;
     border-style: solid;
     border-width: 0px 1px;
-    border-color:$primary;
+    border-color: $gray-500;
     background-color: white;
-    
-    .header{
+    box-sizing: border-box;
+    border-radius: 0.5rem;
+    .header {
+      height: 10%;
+      box-sizing: border-box;
+      border-radius: 0.5rem;
+      background-color: #2196f3
+    }
+    .message-control {
       height: 15%;
+      box-sizing: border-box;
       
+      textarea {
+        margin-left:5px;
+        border-radius: 2rem;
+      }
+      button {
+        height: 90%;
+        margin:0px 4px;
+        border-radius: 10px;
+        padding-top: 0;
+        padding-bottom: 0;
+        background-color: $primary;
+        color:white;
+      }
+      
+    }
+    .list-messages {
+      width: 100%;
+      height: 75%;
+      overflow-y: scroll;
+      box-sizing: border-box;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+      .message {
+        width: 100%;
+        margin:7px 0px;
+        display: flex;
+        
+        span {
+        display: inline-block;
+        max-width: 75%;
+        border-radius: 10px;
+        padding:5px 10px;
+        }
+        span.current_user{
+          background-color: $cus_blue;
+          color: white;
+          margin-left: auto;
+          margin-right: 5%;
+        }
+        span.partner{
+          background-color: $gray-300;
+          color: black;
+          margin-right: auto;
+          margin-left:5%;
+        }
+      }
     }
   }
 }

@@ -1,10 +1,9 @@
 <ul class="list-group chat-bar h-75" id="chat-bar">
-  <% User.all.each do |user| %>
-    <li class="user-<% user.id %> list-group-item d-flex align-items-center justify-content-between d-block row" user_id="<%= user.id %>">
+  <% User.where.not(id: current_user.id).each do |user| %>
+    <li class="list-group-item d-flex align-items-center 
+              justify-content-between d-block row" user_id="<%= user.id %>">
         <span class="username col-8"><%= user.name %></span>
-        <div class="d-flex col-4 ">
-          <span class="icon-status <%= user.online ? 'online' : 'offline' %> ml-2"></span>
-        </div>
+        <%= render(partial:'status/status', locals:{user:user}) %>
     </li>
   <% end %>
   <div hidden id="chat-box-markup"></div>

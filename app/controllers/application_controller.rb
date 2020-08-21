@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ApplicationController < ActionController::Base
   before_action :set_locale
   include Pagy::Backend
@@ -15,7 +17,6 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_out_path_for(_resource)
-    
     new_user_session_path
   end
 

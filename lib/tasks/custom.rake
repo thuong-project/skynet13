@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # lib/tasks/custom_seed.rake
 namespace :db do
   namespace :seed do

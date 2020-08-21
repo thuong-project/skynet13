@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -71,4 +73,7 @@ Rails.application.configure do
     authentication: 'plain',
     enable_starttls_auto: false
   }
+
+# Store files locally.
+config.active_storage.service = :local
 end

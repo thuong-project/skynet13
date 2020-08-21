@@ -1,15 +1,20 @@
-<div class="chat-box" user_id="<%= @conversation.recipient_id %>" conversation_id="<%=@conversation.id%>">
-  <div class="header d-flex align-items-center bg-primary justify-content-between">
+<div class="chat-box d-flex flex-column" user_id="<%= @conversation.opposed_user(current_user).id %>"
+     conversation_id="<%=@conversation.id%>">
+  <div class="header d-flex d-block align-items-center  justify-content-between">
     <div>
       <a class="text-white ml-2 " href="<%= user_path(@recipient) %>"><%= @recipient.name %></a>
-      <span class="icon-status ml-2 <%= @recipient.online ? 'online' : 'offline' %>"></span>
+      <%= render(partial: 'status/status', locals:{user:@recipient}) %>
     </div>
     <button class="close mr-3">
       <span>&times;</span>
     </button>
   </div>
   <ul class="list-messages">
-   
     <li class="message-markup"></li>
   </ul>
+  <div class="message-control d-flex align-items-center">
+    <textarea name="message-will-send" class="flex-grow-1 w-100 h-100 form-control" rows="1"
+     placeholder="Enter message..."></textarea>
+    <button class="send-message btn" type="button">send</button>
+  </div>
 </div>

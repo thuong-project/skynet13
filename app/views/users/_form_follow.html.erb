@@ -1,6 +1,6 @@
 <% user ||= @user  %>
 <% following = current_user.following? user %>
   <form method="post" action="<%= follow_user_path( user) %>" class="d-inline" id="follow-toggle-<%= user.id %>" data-remote="true" data-type="script">
-  <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
+  
 <input type="submit" class="btn <%= following ? 'btn-secondary' : 'btn-primary' %>" value="<%= following ? 'unfollow' : 'follow' %>" />
 </form>
