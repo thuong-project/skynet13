@@ -1,17 +1,17 @@
+# frozen_string_literal: true
+
 class Conversations::ConversationsController < ApplicationController
   layout false
   before_action :set_conversation
 
-  
   def show
     @messages = @conversation.messages
     render 'conversations/show'
   end
 
   def create_message
-   @conversation.messages.create(body: params[:content], user_id: current_user.id)
+    @conversation.messages.create(body: params[:content], user_id: current_user.id)
   end
-
 
   private
 

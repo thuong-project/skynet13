@@ -1,13 +1,10 @@
 <div class="container">
   <div class="row">
-    <div class="col user-<%= @user.id %>">
+    <div class="col" user_id="<%= @user.id %>">
       <h2>Profile</h2>
       <div class="d-flex align-items-center">
-        <strong class="d-inline">ID: <%= @user.id %></strong>
-        <div class="d-inline-flex align-items-center justify-content-center ml-2">
-          <span class="icon-status <%= @user.online ? 'online' : 'offline' %>"></span>
-        </div>
-        
+        <strong class="d-inline mr-2">ID: <%= @user.id %></strong>
+        <%= render(partial: 'status/status', locals:{user:@user}) %>
       </div>
       <p>
         <strong>Name:</strong>

@@ -8,6 +8,8 @@
     "@rails/webpacker": "4.2.2",
     "bootstrap": "^4.5.2",
     "jquery": "^3.5.1",
+    "moment": "^2.27.0",
+    "moment-timezone": "^0.5.31",
     "popper.js": "^1.16.1",
     "turbolinks": "^5.2.0"
   },

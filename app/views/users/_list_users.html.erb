@@ -12,15 +12,13 @@
     </thead>
     <tbody>
       <% @users.each do |user| %>
-        <tr class="user-<%= user.id %>">
+        <tr class="" user_id="<%= user.id %>">
           <td><%= user.id %></td>
           <td><a href="<%= user_path(user) %>"><%= user.name %></a></td>
           <td><%= user.username %></td>
           <td><%= user.email %></td>
-          <td>
-            <div class="d-flex flex-center">
-              <span class="icon-status <%= user.online ? 'online' : 'offline' %>"></span>
-            </div>
+          <td class="d-flex justify-content-center align-items-center">
+            <%= render(partial: 'status/status', locals:{user:user}) %>
           </td>
           <td><%= render(partial: 'form_follow', locals:{user: user}) %></td>
         </tr>

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UsersController < ApplicationController
   layout 'home'
   before_action :set_user, only: %i[show edit update destroy follow posts following followers follow]
