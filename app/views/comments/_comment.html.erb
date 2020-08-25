@@ -1,0 +1,16 @@
+<% data_url = comment_path(post,comment) %>
+<li class="list-group-item" 
+    name="comment" 
+    data-url="<%= data_url %>"
+    >
+  <p><%= comment.content %></p>
+  <% if comment.user_id == current_user.id %>
+    <a href="<%= data_url + '/edit' %>" data-remote="true"
+       current-target="li[name='comment'][data-url='<%= data_url %>']"
+       incoming-target="form[action='<%= data_url %>'][data-method='put']"
+       name="edit"
+    >edit</a>
+    <a href="<%= data_url %>" data-remote="true" 
+         data-method="delete" data-confirm="Are you sure?">delete</a>
+  <% end %>
+</li>

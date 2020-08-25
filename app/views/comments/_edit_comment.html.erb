@@ -1,0 +1,12 @@
+<% if comment.user_id == current_user.id  %>
+  <form action="<%= comment_path(post, comment) %>"
+        method="post" data-remote="true"
+        name="update-comment"
+  >
+  <input type="hidden" name="_method" method="put">
+  <div class="form-group mt-2 ">
+    <textarea rows="3" name="content" placeholder="" class="form-control w-100"></textarea>
+    <input type="submit" value="comment" class="btn btn-primary mt-2">
+  </div>
+  </form>
+<% end%>

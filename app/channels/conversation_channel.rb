@@ -20,7 +20,9 @@ class ConversationChannel < ApplicationCable::Channel
     )
   end
 
-  def unsubscribed; end
+  def unsubscribed
+    
+  end
 
   def receive(payload)
     setting

@@ -1,0 +1,5 @@
+<% data_url = user_post_path(current_user, @post) %>
+(function(){
+  let form = $('<%= escape_javascript( render 'posts/update_form')%>');
+  form.insertAfter("[name='post'][data-url='<%= data_url %>']")
+})();

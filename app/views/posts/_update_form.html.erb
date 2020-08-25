@@ -1,0 +1,15 @@
+<form action="<%= user_post_path(current_user, @post)%>" 
+      method="post" 
+      class="w-50 mb-5"
+      data-remote="true"
+      enctype="multipart/form-data">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <input type="hidden" name="_method" value="patch">
+  <div class="form-group mb-1">
+    <textarea  name="content" id="post-content" 
+    class="form-control" rows="3" 
+    ><%= @post.content %></textarea>
+  </div>
+  <input type="file" name="images[]" multiple><br>
+  <input type="submit" value="Done" class="btn btn-primary px-4 my-2">
+</form>

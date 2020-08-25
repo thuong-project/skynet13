@@ -1,0 +1,14 @@
+
+(function(){
+  let oldForm = $("form[action='<%= comment_path(@post,@comment) %>']").
+            filter("[data-method='put']");
+  let newForm = $('<%= escape_javascript( render 'comment_form', method: 'put', 
+                                            comment: @comment, post: @post) %>');
+  console.log(oldForm.length);
+  if(oldForm.length > 0){
+    oldForm.replaceWith(newForm);
+  }
+  else {
+    newForm.insertAfter("li[data-url='<%= comment_path(@post,@comment) %>']")
+  }
+})();

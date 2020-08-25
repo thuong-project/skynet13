@@ -1,9 +1,2 @@
-<form action="<%= create_post_user_path(current_user) %>" method="post" id="form-post" class="w-50 mb-5">
-  <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
-  <div class="form-group mb-1">
-    <label for="post-content" class="text-primary">Create new post</label>
-    <textarea  name="content" form="form-post" id="post-content" placeholder="What is on your mind, <%= current_user.name %>" class="form-control" rows="5"></textarea>
-  </div>
-  <input type="submit" value="Post" class="btn btn-primary px-4">
-</form>
+<%= render 'posts/create_form' %>
 <%= render 'posts/list_posts' %>

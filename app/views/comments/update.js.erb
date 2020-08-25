@@ -1,0 +1,7 @@
+<% data_url = comment_path(@post, @comment) %>
+$("form[action='<%= data_url %>'][data-method='put']").remove();
+
+$("button[name='cancel'][incoming-target=\"form[action='<%= data_url %>'][data-method='put']\"]").remove()
+$("li[data-url='<%= data_url %>']").
+replaceWith("<%= escape_javascript( render 'comments/comment', 
+                                  post:@post, comment: @comment) %>")

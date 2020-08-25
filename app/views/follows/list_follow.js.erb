@@ -1,0 +1,2 @@
+$("#follow").html("<%= escape_javascript(render(partial: 'follows/list_follow', locals: {users: @users, pagy: @pagy, heading: @heading})) %>");
+

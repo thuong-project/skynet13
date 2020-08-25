@@ -1,0 +1,27 @@
+<% data_url = user_post_path(current_user, post) %>
+<li id="post-<%= post.id %>" data-post-id="<%= post.id%>" name="post"
+    data-url="<%= data_url %>"
+>
+  <span class="user"><%= link_to post.user.name, post.user %></span>
+  <div>
+    <span class="content"><%= post.content %></span>
+    <% post.images.each do |image|%>
+      <img src="<%= url_for(image) %>" class="img-post" alt="">
+    <% end%>
+    <%= render 'likes/like_form', post: post %>
+    <em class="d-block">
+      Posted <%= time_ago_in_words(post.created_at) %> ago.
+    </em>
+  </div>
+  <% if current_user.id == post.user_id %>
+    <a href="<%= data_url + '/edit' %>" data-remote="true"
+       current-target="[name='post'][data-url='<%= data_url %>']"
+       incoming-target="form[action='<%= data_url %>']"
+       name="edit"
+    >edit</a>
+    <a href="<%= data_url %>" data-method='delete' data-confirm="Are you sure?"
+       data-remote="true"
+    >delete</a>
+  <% end %>
+  <%= render 'comments/comments', post: post%>
+</li>
