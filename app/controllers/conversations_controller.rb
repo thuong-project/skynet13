@@ -1,12 +1,11 @@
 # frozen_string_literal: true
 
-class Conversations::ConversationsController < ApplicationController
+class ConversationsController < ApplicationController
   layout false
   before_action :set_conversation
 
   def show
     @messages = @conversation.messages
-    render 'conversations/show'
   end
 
   def create_message

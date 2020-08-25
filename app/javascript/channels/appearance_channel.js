@@ -5,7 +5,7 @@ consumer.subscriptions.create({
   channel:'AppearanceChannel'
  }, {
   received: function(data) {
-    var user = JSON.parse(data)
+    var user = data;
     if (user.online === true){
       statusElement(user).attr('class','icon-status online');
       

@@ -2,7 +2,7 @@
      conversation_id="<%=@conversation.id%>">
   <div class="header d-flex d-block align-items-center  justify-content-between">
     <div>
-      <a class="text-white ml-2 " href="<%= user_path(@recipient) %>"><%= @recipient.name %></a>
+      <a class="ml-2 " href="<%= user_path(@recipient) %>"><%= @recipient.name %></a>
       <%= render(partial: 'status/status', locals:{user:@recipient}) %>
     </div>
     <button class="close mr-3">

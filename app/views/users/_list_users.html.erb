@@ -20,7 +20,7 @@
           <td class="d-flex justify-content-center align-items-center">
             <%= render(partial: 'status/status', locals:{user:user}) %>
           </td>
-          <td><%= render(partial: 'form_follow', locals:{user: user}) %></td>
+          <td><%= render(partial: 'follows/form_follow', locals:{user: user}) %></td>
         </tr>
       <% end %>
     </tbody>

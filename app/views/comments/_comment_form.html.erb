@@ -1,0 +1,17 @@
+<% method ||= 'post' %>
+<% comment ||= nil %>
+
+<form action="<%= method === 'post' ? comments_path(post) : 
+                                      comment_path(post,comment)%>" 
+      method="post"
+      data-remote="true"
+      data-method="<%= method %>"
+      name="comment-form"
+      >
+  <input name="_method" type="hidden" value="<%= method %>" />
+  <div class="form-group mt-2 ">
+    <textarea rows="3" name="content" class="form-control w-100"
+    ><%= comment.content if comment %></textarea>
+    <input type="submit" value="<%= method == 'post' ? 'comment' : 'done' %>" class="btn btn-primary mt-2">
+  </div>
+</form>

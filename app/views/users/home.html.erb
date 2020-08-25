@@ -1,11 +1,23 @@
 <div class="container">
   <div class="row">
     <div class="col" user_id="<%= @user.id %>">
-      <h2>Profile</h2>
+      <div>
+        <h2 class="d-inline">Profile</h2>
+        <%if @user == current_user %>
+          <a href="<%= edit_user_path %>">Edit Profile</a>
+          <a href="<%= change_password_path %>">Change Password</a>
+        <% end %>
+      </div>
       <div class="d-flex align-items-center">
         <strong class="d-inline mr-2">ID: <%= @user.id %></strong>
         <%= render(partial: 'status/status', locals:{user:@user}) %>
       </div>
+      <p>
+        <strong>Avatar:</strong>
+        <% if @user.avatar.attached? %>
+          <img src="<%= url_for(@user.avatar) %>" alt="Avatar" class="avatar">
+        <% end %>
+      </p>
       <p>
         <strong>Name:</strong>
         <%= @user.name %>
@@ -20,13 +32,13 @@
       </p>
       <div>
         <div class="d-inline-block">
-          <a href="<%= following_user_path(@user) %>" class="" data-remote="true" data-type="script">
+          <a href="<%= user_following_path(@user) %>" class="" data-remote="true" data-type="script">
             <div id="count_following-<%= @user.id %>"><%= @user.following.count %></div>
             <div>following</div>
           </a>
         </div>
         <div class="d-inline-block ml-2">
-          <a href="<%= followers_user_path(@user) %>" class="" data-remote="true" data-type="script">
+          <a href="<%= user_followers_path(@user) %>" class="" data-remote="true" data-type="script">
             <div id="count_followers-<%= @user.id %>"><%= @user.followers.count %></div>
             <div>followers</div>
           </a>
@@ -41,12 +53,7 @@
     <div class="col">
       <h2>Posteds</h2>
       <div id="list_posts">
-        <a href="<%= posts_user_path(@user)%>" id="get_posts" data-remote="true" data-type="script">abc</a>
-        <script>
-          $(document).ready(function(){
-            $('#get_posts')[0].click();
-          })
-        </script>
+        <%= render 'posts/list_posts' %>
       </div>
     </div>
   </div>

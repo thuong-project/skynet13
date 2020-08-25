@@ -1,0 +1,16 @@
+<form action="<%= user_posts_path(current_user)%>" 
+      method="post" 
+      id="form-post" class="w-50 mb-5"
+      enctype="multipart/form-data"
+      data-remote="true"
+>
+ <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <div class="form-group mb-1">
+    <label for="post-content" class="text-primary">Create new post</label>
+    <textarea  name="content" form="form-post" id="post-content" 
+    placeholder="What is on your mind, <%= current_user.name %>" 
+    class="form-control" rows="5"></textarea>
+  </div>
+  <input type="file" name="images[]" multiple><br>
+  <input type="submit" value="Post" class="btn btn-primary px-4 my-2">
+</form>

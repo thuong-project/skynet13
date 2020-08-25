@@ -1,0 +1,5 @@
+
+$("[data-post-id=\"<%= @post.id %>\"] ul[name=\"comments\"]").
+append("<%= escape_javascript( render'comments/comment', comment: @comment, post: @post ) %>");
+
+$("[data-post-id=\"<%=@post.id%>\"] textarea").val("");

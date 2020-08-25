@@ -1,0 +1,16 @@
+<% if post.user_id != current_user.id %>
+  <% like = post.likes.find_by(user_id: current_user.id)%>
+  <% liked = like ? true : false %>
+  <% num_of_like = post.likes.size %>
+  <form action=<%= liked ? like_path(post, like) : 
+                         likes_path(post)
+             %>
+      method="post"
+      data-remote="true" name="like" class="form-inline"
+>
+     <input name="_method" type="hidden" value="<%= liked ? 'delete' : 'post' %>" />
+  <input type="submit" value="<%= liked ? 'liked' : 'like' %>" 
+            class="btn <%= liked ? 'btn-secondary' : 'btn-primary' %>">
+  <span><%= num_of_like %></span>
+</form>
+<% end%>

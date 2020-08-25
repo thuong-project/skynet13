@@ -1,0 +1,3 @@
+$("[data-post-id='<%= @post.id %>']").find("ul[name='comments']").find(
+  "li[data-url='<%= comment_path(@post, @comment) %>']"
+).remove();

@@ -1,0 +1,4 @@
+<% post_id = @post.id%>
+
+$("[data-post-id=\"<%= post_id %>\"] form[name=\"like\"]").replaceWith(
+  "<%= escape_javascript( render'likes/like_form', post: @post ) %>");

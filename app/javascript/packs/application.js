@@ -6,15 +6,15 @@ require("@rails/ujs").start();
 require("turbolinks").start();
 require("@rails/activestorage").start();
 require("channels");
+window.$ = $;
 import "bootstrap";
+
 import consumer from "../channels/consumer";
-var moment = require('moment-timezone')
+var moment = require("moment-timezone");
 
-function formatDateTime(date){
-  return moment(date).utcOffset('+07:00').locale('en').calendar();
+function formatDateTime(date) {
+  return moment(date).utcOffset("+07:00").locale("en").calendar();
 }
-
-
 
 document.addEventListener("turbolinks:load", function () {
   $("#chat-bar li").click(function () {
@@ -42,11 +42,11 @@ document.addEventListener("turbolinks:load", function () {
 
     function renderMessages(chatBoxElement, messages) {
       messages.forEach(function (mess, index, messages) {
-        var partner_id = chatBoxElement.attr('user_id');
+        var partner_id = chatBoxElement.attr("user_id");
         var str = "";
         var timeStr = formatDateTime(mess.created_at);
 
-        if(mess.user_id == partner_id)
+        if (mess.user_id == partner_id)
           str = `<li class="message"><span class="partner">${mess.body}</span>
                       <span class="time">${timeStr}</span>    
                 </li>`;
@@ -62,12 +62,12 @@ document.addEventListener("turbolinks:load", function () {
 
     function scrollListMess(chatBoxElement) {
       var ul = chatBoxElement.find(".list-messages");
-      var li = ul.find('li');
-      var li_height =li.innerHeight(); 
+      var li = ul.find("li");
+      var li_height = li.innerHeight();
       var num_li = li.length;
-      console.log("num_li",num_li);
+      console.log("num_li", num_li);
       console.log(li_height);
-      ul.scrollTop(li_height*num_li);
+      ul.scrollTop(li_height * num_li);
     }
 
     function addEventForChatBox(chatBoxElement) {
@@ -103,7 +103,7 @@ document.addEventListener("turbolinks:load", function () {
               if (data.type == "new_mess") {
                 var new_mess = JSON.parse(data.content);
                 console.log("new mess :>> ", new_mess);
-                $(chatBoxElement.find('.typing')).remove();
+                $(chatBoxElement.find(".typing")).remove();
                 renderMessages(chatBoxElement, new_mess);
               } else if (data.type == "typing") {
                 renderTyping(chatBoxElement, data);
@@ -173,15 +173,13 @@ document.addEventListener("turbolinks:load", function () {
             console.log("ctrl+enter");
             var oldvar = $(inputMess).val();
             $(inputMess).val(oldvar + "\r\n");
-          }
-          else if (keycode == "13") {
+          } else if (keycode == "13") {
             event.preventDefault();
             $(sendMessButton).click();
           }
         });
 
         //
-        
       }
 
       function isTypingListenner(chatBoxElement) {
@@ -228,4 +226,61 @@ document.addEventListener("turbolinks:load", function () {
     var arr = $(`.chat-box[user_id="${partner_id}"]`);
     return arr.length > 0 ? true : false;
   }
+
+  function cancel(element) {
+    $(element).off();
+    $(element).one("click",(function () {
+      let current = $(this).attr("current-target");
+      let incoming = $(this).attr("incoming-target");
+      let cancel = `<button class="btn btn-danger" 
+                              current-target="${current}"
+                              incoming-target="${incoming}"
+                              name="cancel"
+                      >Cancel</button>`;
+
+      let cancelE = $(cancel);
+      $(cancelE).click(function () {
+        $(incoming).remove();
+        $(current).show();
+        $(this).remove();
+      });
+
+      console.log(current);
+      $(current).hide();
+      $(cancelE).insertAfter($(current));
+    }));
+  }
+  cancel("[name='edit']");
+
+  function observerCallback(mutationList, observer) {
+    mutationList.forEach((mutation) => {
+      switch (mutation.type) {
+        case "childList":
+          /* One or more children have been added to and/or removed
+             from the tree.
+             (See mutation.addedNodes and mutation.removedNodes.) */
+            console.log("modify tree");
+            cancel("[name='edit']");
+          break;
+        case "attributes":
+          /* An attribute value changed on the element in
+             mutation.target. 
+             The attribute name is in mutation.attributeName, and 
+             its previous value is in mutation.oldValue. */
+          break;
+      }
+    });
+  }
+
+  const targetNode = document.body;
+  const observerOptions = {
+    childList: true,
+    //attributes: true,
+
+    // Omit (or set to false) to observe only changes to the parent node
+    subtree: true,
+  };
+
+  const observer = new MutationObserver(observerCallback);
+  observer.observe(targetNode, observerOptions);
 });

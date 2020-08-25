@@ -1,16 +1,4 @@
 /*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *= 
- *= require_tree .
  *= require_self
 
  */
@@ -37,7 +25,7 @@ label:focus,
 .btn.active
 {
     outline:0px !important;
-    -webkit-appearance:none;
+    //-webkit-appearance:none;
     box-shadow: none !important;
 }
 
@@ -63,6 +51,17 @@ h2 {
 
 div.field_with_errors {
   display: inline;
+}
+img.img-post {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 0.5rem;
+}
+
+img.avatar {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 0.5rem;
 }
 
 .icon-status {
@@ -107,13 +106,20 @@ div.field_with_errors {
     box-sizing: border-box;
     border-radius: 0.5rem;
     .header {
-      height: 10%;
+      height: 12.5%;
       box-sizing: border-box;
-      border-radius: 0.5rem;
-      background-color: #2196f3
+      border-top: 1px solid $gray-500;
+      border-top-left-radius: 0.5rem;
+      border-top-right-radius: 0.5rem;
+      border-bottom-style: solid;
+      border-bottom-width: 1px;
+      border-bottom-right-radius: 0;
+      border-bottom-left-radius: 0;
+      border-bottom-color: $gray-500;
+      color: black;
     }
     .message-control {
-      height: 15%;
+      height: 12.5%;
       box-sizing: border-box;
       
       textarea {
