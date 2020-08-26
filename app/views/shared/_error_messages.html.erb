@@ -1,3 +1,7 @@
+<% notice ||= nil %>
+<% if  notice %>
+  <em class="text-success"> <%= notice %></em>
+<% end %>
 <% if !resource.nil? && resource.errors.any? %>
   <div id="error_explanation">
     <strong class="text-danger">
@@ -15,4 +19,4 @@
       <% end %>
     </ul>
   </div>
-<% end %>
+<% end%>

@@ -1,6 +1,8 @@
-<ul name="comments" class="list-group list-group-flush">
-  <% post.comments.each do |comment| %>
-    <%= render 'comments/comment', comment:comment, post: post %>
-  <% end %>
-</ul>
-<%= render 'comments/comment_form', post: post %>
+<div name="wrap-comments">
+  <%= render 'comments/comment_form', post: @post %>
+  <ul name="comments" class="list-group list-group-flush">
+    <% @comments.each do |comment| %>
+      <%= render 'comments/comment', comment:comment, post: @post %>
+    <% end %>
+  </ul>
+</div>

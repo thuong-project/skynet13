@@ -1,17 +1,22 @@
 <% method ||= 'post' %>
 <% comment ||= nil %>
-
 <form action="<%= method === 'post' ? comments_path(post) : 
                                       comment_path(post,comment)%>" 
       method="post"
       data-remote="true"
       data-method="<%= method %>"
       name="comment-form"
+      class="mb-2"
       >
   <input name="_method" type="hidden" value="<%= method %>" />
-  <div class="form-group mt-2 ">
-    <textarea rows="3" name="content" class="form-control w-100"
-    ><%= comment.content if comment %></textarea>
-    <input type="submit" value="<%= method == 'post' ? 'comment' : 'done' %>" class="btn btn-primary mt-2">
+<div class="mt-2 d-flex align-items-center">
+  <div class="">
+    <%= render 'shared/avatar',user:current_user %>
   </div>
+  <textarea rows="1" name="content" class=" border form-control ml-2 rounded-pill"
+            style="width:60%" placeholder="Write a comment..."
+    ><%= comment.content if comment %></textarea>
+  <input type="submit" value="<%= method == 'post' ? 'comment' : 'done' %>" 
+    class="btn <%= method=='post' ? 'btn-primary' : 'btn-success px-4' %> mr-2 ml-auto rounded-pill">
+</div>
 </form>

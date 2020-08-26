@@ -12,20 +12,20 @@
         <strong class="d-inline mr-2">ID: <%= @user.id %></strong>
         <%= render(partial: 'status/status', locals:{user:@user}) %>
       </div>
-      <p>
-        <strong>Avatar:</strong>
-        <% if @user.avatar.attached? %>
-          <img src="<%= url_for(@user.avatar) %>" alt="Avatar" class="avatar">
-        <% end %>
+      <p class="d-flex align-items-center">
+        <strong class="mr-2"> Avatar:</strong>
+        <%= render 'shared/avatar',user:@user, size:'lg' %>
       </p>
       <p>
         <strong>Name:</strong>
         <%= @user.name %>
       </p>
-      <p>
-        <strong>Username:</strong>
-        <%= @user.username %>
-      </p>
+      <% if @user == current_user %>
+        <p>
+          <strong>Username:</strong>
+          <%= @user.username %>
+        </p>
+      <% end%>
       <p>
         <strong>Email:</strong>
         <%= @user.email %>
@@ -53,8 +53,16 @@
     <div class="col">
       <h2>Posteds</h2>
       <div id="list_posts">
-        <%= render 'posts/list_posts' %>
+        <a href="<%= user_posts_path(@user) %>" class="" data-remote="true" 
+           data-type="script" hidden>
+           </a>
       </div>
     </div>
   </div>
+  <script>
+  
+    document.querySelector("a[href='<%= user_following_path(@user) %>']").click()
+    document.querySelector("a[href='<%= user_posts_path(@user) %>']").click()
+</script>
 </div>
+
