@@ -1,30 +1,26 @@
-<div class="table-responsive">
-  <table class="table table-sm table-striped">
-    <thead class="thead-dark">
-      <tr>
-        <th>Id</th>
-        <th>Name</>
-        <th>Username</th>
-        <th>Email</th>
-        <th>Status</th>
-        <th>follow / unfollow</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @users.each do |user| %>
-        <tr class="" user_id="<%= user.id %>">
-          <td><%= user.id %></td>
-          <td><a href="<%= user_path(user) %>"><%= user.name %></a></td>
-          <td><%= user.username %></td>
-          <td><%= user.email %></td>
-          <td class="d-flex justify-content-center align-items-center">
-            <%= render(partial: 'status/status', locals:{user:user}) %>
-          </td>
-          <td><%= render(partial: 'follows/form_follow', locals:{user: user}) %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-</div>
+ 
+
+<table class="w-100 list-users table ">
+<thead class="text-secondary">
+  <tr>
+    <th class="pl-0">Name</th>
+    <th>Status</th>
+    <th>Follow</th>
+  </tr>
+</thead>
+  <% @users.each do |user| %>
+    <tr class="" user_id="<%= user.id %>">
+      <td class="pl-0">
+       <%= render 'shared/avatar_username', user:user %>
+      </td>
+      <td>
+        <%= render(partial: 'status/status', locals:{user:user}) %>
+      </td>
+      <td>
+        <span><%= render(partial: 'follows/form_follow', locals:{user: user}) %></span>
+      </td>
+    </tr>
+  <% end %>
+</table>
 <br>
 <%== pagy_bootstrap_nav(@pagy) %>

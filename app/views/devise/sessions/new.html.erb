@@ -4,9 +4,7 @@
     <p class="notice"><%= err %></p>
   <%end%>
 <% end %>
-<% unless notice.nil?%>
-  <p class="text-danger"><%= notice %></p>
-<% end %>
+
 <% unless alert.nil?%>
   <p class="text-danger"><%= alert %></p>
 <% end %>
@@ -20,7 +18,7 @@
     <%= f.password_field :password, autocomplete: "current-password" %>
   </div>
   <% if devise_mapping.rememberable? %>
-    <div class="field">
+    <div class="mt-2">
       <%= f.check_box :remember_me %>
       <%= f.label :remember_me %>
     </div>

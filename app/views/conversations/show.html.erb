@@ -1,11 +1,12 @@
-<div class="chat-box d-flex flex-column" user_id="<%= @conversation.opposed_user(current_user).id %>"
+<% opposed_user = @conversation.opposed_user(current_user) %>
+<div class="chat-box d-flex flex-column" user_id="<%= opposed_user.id %>"
      conversation_id="<%=@conversation.id%>">
-  <div class="header d-flex d-block align-items-center  justify-content-between">
-    <div>
-      <a class="ml-2 " href="<%= user_path(@recipient) %>"><%= @recipient.name %></a>
+  <div class="header d-flex d-block align-items-center ">
+    <div class="ml-2 d-flex align-items-center">
+      <%= render 'shared/avatar_username',user:opposed_user,style_textname: 'width:140px' %>
       <%= render(partial: 'status/status', locals:{user:@recipient}) %>
     </div>
-    <button class="close mr-3">
+    <button class="close ml-auto mr-2">
       <span>&times;</span>
     </button>
   </div>

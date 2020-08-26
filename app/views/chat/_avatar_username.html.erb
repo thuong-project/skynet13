@@ -1,0 +1,14 @@
+ <% avatar = user.avatar.attached? ? user.avatar : nil%>
+<% style_textname ||= nil %>
+<div  class="d-inline-flex align-items-center text-decoration-none">
+ 
+    <% if avatar %>
+      <img src="<%= url_for(avatar) %>" alt="" class="avatar-sm">
+    <% else %>
+      <i class="fas fa-user-circle fa-2x avatar-sm"></i>
+    <% end%>
+ 
+  <span class="ml-2 name-user font-weight-normal text-truncate d-inline-block" 
+        style="width:100px;cursor:auto"
+  ><%= user.name %></span>
+</div>

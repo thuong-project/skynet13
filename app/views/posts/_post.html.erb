@@ -1,27 +1,52 @@
-<% data_url = user_post_path(current_user, post) %>
+<% data_url = user_post_path(post.user, post) %>
 <li id="post-<%= post.id %>" data-post-id="<%= post.id%>" name="post"
     data-url="<%= data_url %>"
+    class="bg-white border border-gray rounded px-3 pt-3 my-3 post"
 >
-  <span class="user"><%= link_to post.user.name, post.user %></span>
-  <div>
-    <span class="content"><%= post.content %></span>
+  <div class="user clearfix">
+    
+    <div class="pl-2">
+     <%= render 'shared/avatar_username', user:post.user, size:'lg' %>
+      <br>
+      <div class="d-flex">
+        <em class="d-block time-ago">
+          Posted <%= time_ago_in_words(post.created_at) %> ago.
+        </em>
+        <% if current_user.id == post.user_id %>
+          <div class="ml-auto">
+            <a href="<%= data_url + '/edit' %>" data-remote="true"
+                >edit</a>
+            <a href="<%= data_url %>" data-method='delete' data-confirm="Are you sure?"
+               data-remote="true">delete</a>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="border-bottom border-gray py-2">
+    <p class="content mb-2"><%= post.content %></p>
     <% post.images.each do |image|%>
       <img src="<%= url_for(image) %>" class="img-post" alt="">
     <% end%>
-    <%= render 'likes/like_form', post: post %>
-    <em class="d-block">
-      Posted <%= time_ago_in_words(post.created_at) %> ago.
-    </em>
   </div>
-  <% if current_user.id == post.user_id %>
-    <a href="<%= data_url + '/edit' %>" data-remote="true"
-       current-target="[name='post'][data-url='<%= data_url %>']"
-       incoming-target="form[action='<%= data_url %>']"
-       name="edit"
-    >edit</a>
-    <a href="<%= data_url %>" data-method='delete' data-confirm="Are you sure?"
-       data-remote="true"
-    >delete</a>
-  <% end %>
-  <%= render 'comments/comments', post: post%>
+  <div class="d-flex justify-content-between align-content-center stat-post
+                border-bottom py-2"
+      >
+    <div>
+      <i class="far fa-thumbs-up text-secondary"></i>
+      <span name="count-like"><%= post.likes.size %></span>
+    </div>
+    <div>
+      <span name="count-comments"><%= post.comments.size %></span>
+      <span>comments</span>
+    </div>
+  </div>
+  <div class="d-flex justify-content-between align-items-center border-bottom" 
+        name="post-bottom">
+    <%= render 'likes/like_form', post:post %>
+    <%= render 'comments/comment_button',post:post %>
+  </div>
+  <div name="wrap-comments">
+
+  </div>
 </li>

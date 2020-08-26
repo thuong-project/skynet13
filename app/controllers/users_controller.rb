@@ -28,7 +28,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    @pagy, @posts = pagy(current_user.posts)
+    
   end
 
   
@@ -40,7 +40,7 @@ class UsersController < ApplicationController
   # PUT/PATCH /users/1
   def update
     if current_user.update(user_params)
-      flash[:notice] = "Update profile successfully"
+       @notice= "Update profile successfully"
     end
     render 'edit'
   end
