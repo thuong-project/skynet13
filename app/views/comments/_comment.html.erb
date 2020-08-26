@@ -1,16 +1,28 @@
-<% data_url = comment_path(post,comment) %>
-<li class="list-group-item" 
+<% owner = comment.user 
+  data_url = comment_path(post,comment)
+%>
+<li class="d-flex py-2" 
     name="comment" 
     data-url="<%= data_url %>"
     >
-  <p><%= comment.content %></p>
+  <div class="mr-2">
+    <%= render 'shared/avatar',user: owner%>
+  </div>
+  <div class="w-75">
+    <div class="d-inline-block bg-content rounded px-4 py-2 rounded-pill">
+      <a href="<%= user_path(owner) %>" class="name-color text-break"><%= owner.name%></a>
+      <span class="text-break"><%= comment.content %></span>
+    </div>
+  </div>
   <% if comment.user_id == current_user.id %>
-    <a href="<%= data_url + '/edit' %>" data-remote="true"
+    <div class="ml-auto">
+      <a href="<%= data_url + '/edit' %>" data-remote="true"
        current-target="li[name='comment'][data-url='<%= data_url %>']"
        incoming-target="form[action='<%= data_url %>'][data-method='put']"
        name="edit"
     >edit</a>
-    <a href="<%= data_url %>" data-remote="true" 
+      <a href="<%= data_url %>" data-remote="true" 
          data-method="delete" data-confirm="Are you sure?">delete</a>
+    </div>
   <% end %>
 </li>

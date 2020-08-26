@@ -1,5 +1,5 @@
 <% data_url = user_post_path(current_user, @post) %>
-$("form[action='<%= data_url %>']").remove();
-$("button[name='cancel'][incoming-target=\"form[action='<%= data_url %>']\"]").remove()
+
 $("[name='post'][data-url='<%= data_url %>']").
 replaceWith("<%= escape_javascript( render 'posts/post', post:@post) %>")
+

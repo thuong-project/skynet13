@@ -6,6 +6,7 @@ class CommentsController < ApplicationController
   before_action :set_comment, only: [:edit, :update, :destroy]
   # GET /posts/1/comments
   def index
+    @comments = @post.comments
   end
 
   # POST /posts/1/comments

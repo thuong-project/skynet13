@@ -1,5 +1,6 @@
   <% content_for :content do %>
-  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <body class="home-body">
+  <nav class="navbar navbar-expand-md navbar-light fixed-top " name="navbar">
     <div class="container">
       
       <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,10 +20,13 @@
       </ul>
         <form action="<%= search_users_path %>" method="get" class="form-inline mt-2 mt-md-0">
          
-          <span class="mr-2 badge badge-primary p-2">Search by: </span>
+          <span class="mr-2 badge badge-dark p-2">Search by: </span>
           <div class="form-check-inline">
             <label class="form-check-label text-light">
-              <input type="radio" class="form-check-input" name="field" value="name" checked="checked">name
+              <input type="radio" class="form-check-input" 
+                     name="field" value="name" checked="checked"
+                     style="color:gray"
+                     >name
             </label>
           </div>
           <div class="form-check-inline disabled">
@@ -31,7 +35,7 @@
             </label>
           </div>
           <input type="text" class="form-control mr-sm-2" placeholder="Enter string to search" id="value" name="value">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
         </form>
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
@@ -42,15 +46,16 @@
     </div>
   </nav>
   <main role="main" class="row h-100 mt-3">
-    <div class="col-2">
+    <div class="col-3">
     
     </div>
-    <div class="col-8">
+    <div class="col-6">
       <%= yield %>
     </div>
-    <div class="h-100">
+    <div class="col-3 h-100">
       <%= render 'layouts/chat' %>
     </div>
   </main>
+  <body>
 <% end %>
 <%= render template: "layouts/application"%>

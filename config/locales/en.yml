@@ -30,7 +30,7 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  greeting: 'Wellcome to Fakebook social network!'
+  greeting: 'Wellcome to Sky social network!'
   label:
     login: Enter username or email
     password: Password

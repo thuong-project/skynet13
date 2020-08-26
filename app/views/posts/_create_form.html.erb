@@ -1,16 +1,28 @@
-<form action="<%= user_posts_path(current_user)%>" 
+<% 
+  post ||= nil
+  method = post ? 'patch' : 'post'
+  action = method == 'post' ? user_posts_path(current_user) : user_post_path(current_user)
+  margin_bot = method =='post' ? 'mb-5' : 'mb-0'
+%>
+<form action="<%= action %>" 
       method="post" 
-      id="form-post" class="w-50 mb-5"
+      id="form-post" class="create-post w-100 <%= margin_bot %> border border-gray rounded"
       enctype="multipart/form-data"
       data-remote="true"
 >
- <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <input type="hidden" name="_method" value="<%= method %>">
   <div class="form-group mb-1">
-    <label for="post-content" class="text-primary">Create new post</label>
-    <textarea  name="content" form="form-post" id="post-content" 
+    <label for="post-content" 
+    class="text-create-post pl-3 rounded-top"
+    ><%= method == 'post' ? 'Create Post' : 'Edit Post' %></label>
+    <textarea  name="content" id="post-content" 
     placeholder="What is on your mind, <%= current_user.name %>" 
-    class="form-control" rows="5"></textarea>
+    class="form-control" rows="3"><%= post ? post.content : ''%></textarea>
   </div>
-  <input type="file" name="images[]" multiple><br>
-  <input type="submit" value="Post" class="btn btn-primary px-4 my-2">
+  <div class="d-flex justify-content-between align-items-center">
+    <input type="file" name="images[]" multiple class="ml-2">
+    <input type="submit" value="<%= method == 'post' ? 'Post' : 'Submit' %>" 
+    class="btn btn-primary px-4 my-1 mr-2">
+  </div>
 </form>
