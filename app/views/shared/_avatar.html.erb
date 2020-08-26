@@ -1,0 +1,10 @@
+ <% avatar = user.avatar.attached? ? user.avatar : nil
+    size ||= 'sm'
+ %>
+<a href="<%= user_path(user) %>">
+  <% if avatar %>
+    <img src="<%= url_for(avatar) %>" alt="" class="avatar-<%= size%>">
+  <% else %>
+    <i class="fas fa-user-circle fa-<%= size == 'sm' ? '2x' : '3x' %> text-secondary"></i>
+  <% end%>
+</a>

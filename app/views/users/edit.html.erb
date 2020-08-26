@@ -1,8 +1,6 @@
 <h2>Edit Profile</h2>
 <%= form_with(model: current_user , class: "w-50", local: true) do |f|%>
-<%= render 'shared/flash' %>
-
-<%= render 'shared/error_messages', resource: current_user %>
+<%= render 'shared/error_messages', resource: current_user, notice: @notice %>
   <div class="form-group">
     <%= f.label :username%>
     <%= f.text_field :username, disabled:true, class: "form-control"%>

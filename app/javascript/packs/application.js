@@ -47,12 +47,12 @@ document.addEventListener("turbolinks:load", function () {
         var timeStr = formatDateTime(mess.created_at);
 
         if (mess.user_id == partner_id)
-          str = `<li class="message"><span class="partner">${mess.body}</span>
-                      <span class="time">${timeStr}</span>    
+          str = `<li class="message partner"><span class="mess-content">${mess.body}</span>
+                      <em class="time">${timeStr}</em>    
                 </li>`;
         else
-          str = `<li class="message"><span class="current_user">${mess.body}</span>
-                      <span class="time">${timeStr}</span>
+          str = `<li class="message current-user"><span class="mess-content">${mess.body}</span>
+                      <em class="time">${timeStr}</em>
                 </li>`;
 
         $(str).insertBefore(chatBoxElement.find(".message-markup"));

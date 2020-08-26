@@ -1,4 +1,5 @@
 <% post_id = @post.id%>
 
-$("[data-post-id=\"<%= post_id %>\"] form[name=\"like\"]").replaceWith(
+$("[data-post-id=\"<%= post_id %>\"] a[name=\"like\"]").replaceWith(
   "<%= escape_javascript( render'likes/like_form', post: @post ) %>");
+$("[data-post-id=\"<%= post_id %>\"] span[name=\"count-like\"]").html('<%= @post.likes.size%>')

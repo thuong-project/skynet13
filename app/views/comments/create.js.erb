@@ -1,5 +1,7 @@
 
 $("[data-post-id=\"<%= @post.id %>\"] ul[name=\"comments\"]").
-append("<%= escape_javascript( render'comments/comment', comment: @comment, post: @post ) %>");
+prepend("<%= escape_javascript( render'comments/comment', comment: @comment, post: @post ) %>");
 
 $("[data-post-id=\"<%=@post.id%>\"] textarea").val("");
+$("[data-post-id=\"<%= @post.id %>\"] [name=\"count-comments\"]").
+html('<%= @post.comments.size %>')

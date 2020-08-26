@@ -1,5 +1,24 @@
 <% data_url = user_post_path(current_user, @post) %>
 (function(){
-  let form = $('<%= escape_javascript( render 'posts/update_form')%>');
-  form.insertAfter("[name='post'][data-url='<%= data_url %>']")
-})();
+
+  let post = "[name='post'][data-url='<%= data_url %>']"
+
+  $("<%= escape_javascript( render 'posts/edit', post:@post) %>").
+    insertAfter(post);
+
+  let modal = $("[name=edit-post-modal][data-url='<%= data_url %>']")
+
+  let form = modal.find("form");
+  let submit = form.find("input[type='submit']");
+
+  submit.click(function(e){
+    $(modal).modal('hide');
+  });
+  
+  $(modal).modal('show');
+
+  $(modal).on('hidden.bs.modal', function (e) {
+      $(this).remove();
+  })
+ 
+})()
