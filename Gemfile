@@ -41,6 +41,8 @@ gem 'dotenv-rails'
 
 gem 'pagy'
 
+gem 'faker'
+
 # For 6.0.0 or higher
 
 group :development, :test do
