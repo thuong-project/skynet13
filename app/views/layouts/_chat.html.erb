@@ -1,5 +1,5 @@
-<ul class="list-group chat-bar h-100" id="chat-bar">
-  <% User.all.each do |user| %>
+<ul class="list-group chat-bar h-100 mb-2" id="chat-bar">
+  <% current_user.following.each do |user| %>
     <li class="list-group-item d-flex align-items-center 
               justify-content-between d-block row chat-li" user_id="<%= user.id %>">
         <%= render 'chat/avatar_username', user:user %>
