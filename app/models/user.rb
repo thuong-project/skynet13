@@ -30,6 +30,7 @@ class User < ApplicationRecord
   has_many :messages
   has_many :conversations, foreign_key: :sender_id
   has_one_attached :avatar
+  default_scope -> { order(created_at: :desc) }
 
   def login
     @login || username || email
