@@ -77,6 +77,3 @@ group :production do
   gem 'pg', '1.1.4'
 end
 
-group :production, :development, :test do
-  gem 'rspec-rails', '~> 3.8'
-end
