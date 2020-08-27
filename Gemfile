@@ -43,6 +43,7 @@ gem 'pagy'
 
 gem 'faker'
 
+gem 'redis'
 # For 6.0.0 or higher
 
 group :development, :test do
