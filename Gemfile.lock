@@ -281,7 +281,7 @@ DEPENDENCIES
   omniauth-facebook
   omniauth-google-oauth2
   pagy
-  pg (= 1.1.4)
+  pg
   puma (~> 4.1)
   rails (~> 6.0.3, >= 6.0.3.2)
   rubocop-rails
