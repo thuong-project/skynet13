@@ -28,9 +28,12 @@ class PostsController < ApplicationController
 
   # PUT/PATCH /users/1/posts/1
   def update
-     @post.images.purge if !params[:images].nil? 
+     unless params[:images].nil? 
+        @post.images.purge
+        @post.images.attach(params[:images])
+     end
      @post.update(params.permit(:content));
-     @post.images.attach(params[:images])
+     
   end
 
   # DELETE /users/1/posts/1

@@ -79,7 +79,7 @@ class User < ApplicationRecord
 
     value = data[:value]
 
-    users = User.where("#{field} LIKE ?", "%#{value}%")
+    users = User.where("LOWER(#{field}) LIKE ?", "%#{value.downcase}%")
     # puts users
     users
   end
