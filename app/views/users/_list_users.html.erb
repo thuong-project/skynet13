@@ -17,7 +17,11 @@
         <%= render(partial: 'status/status', locals:{user:user}) %>
       </td>
       <td>
-        <span><%= render(partial: 'follows/form_follow', locals:{user: user}) %></span>
+        <% if user.id != current_user.id %>
+          <span><%= render(partial: 'follows/form_follow', locals:{user: user}) %></span>
+        <% else %>
+          <em>Current user</em>
+        <% end  %>
       </td>
     </tr>
   <% end %>

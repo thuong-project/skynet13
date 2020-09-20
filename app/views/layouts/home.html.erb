@@ -9,13 +9,17 @@
       <div class="navbar-collapse collapse" id="navbarCollapse">
       <ul class="navbar-nav mr-5"> 
         <li class="nav-item">
-          <a class="nav-link text-white" href="<%= newsfeed_path%>">News Feed</a>
+          <a class="<%= active_button(newsfeed_path) ? 'btn btn-dark active' : 'btn btn-outline-dark text-white border-0'%>" 
+             href="<%= newsfeed_path%>">Newsfeed
+          </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link text-white" href="<%= user_path(current_user)%>">My Profile</a>
+        <li class="nav-item ml-1">
+          <a class="<%= active_button(user_path(current_user)) ? 'btn btn-dark active' : 'btn btn-outline-dark text-white border-0'%>"
+           href="<%= user_path(current_user)%>">My Profile</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link text-white" href="<%= users_path%>">All Users</a>
+        <li class="nav-item ml-1">
+          <a class="<%= active_button(users_path) ? 'btn btn-dark active' : 'btn btn-outline-dark text-white border-0'%>"
+           href="<%= users_path%>">All Users</a>
         </li>
       </ul>
         <form action="<%= search_users_path %>" method="get" class="form-inline mt-2 mt-md-0">
@@ -39,15 +43,27 @@
         </form>
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a data-confirm="Are you sure?" data-method="delete" href="<%=destroy_user_session_path %>" class="nav-link text-white">Logout</a>
+            <a data-confirm="Are you sure?" data-method="delete" href="<%=destroy_user_session_path %>" 
+            class="btn btn-outline-dark nav-link text-white border-0">Logout</a>
           </li>
         </ul>
       </div>
     </div>
   </nav>
-  <main role="main" class="row h-100 mt-3">
-    <div class="col-3">
-    
+  <main role="main" class="row h-100 mt-3 mr-0 ml-0 pb-4">
+    <div class="col-3 d-flex">
+      <div class="left-menu d-flex flex-column pl-5 mt-2">
+        <a href="<%= edit_user_path(current_user) %>" class="ml-2 text-dark 
+            <%= active_button(edit_user_path(current_user)) ? 'bg-white' : nil %>" >
+          <i class="far fa-id-card fa-lg mr-2" style="color: #4267b2"></i>
+          <span>Edit Profile</span>
+        </a>
+        <a href="<%= change_password_path %>" class="ml-2 text-dark mt-2
+          <%= active_button(change_password_path) ? 'bg-white' : nil %>" >
+          <i class="fas fa-key fa-lg mr-2" style="color: #4267b2"></i>
+          <span>Change Password</span>
+        </a>
+      </div>
     </div>
     <div class="col-6">
       <%= yield %>
