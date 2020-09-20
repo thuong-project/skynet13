@@ -17,6 +17,9 @@ function formatDateTime(date) {
 }
 
 document.addEventListener("turbolinks:load", function () {
+
+  
+
   $("#chat-bar li").click(function () {
     const recipient_id = $(this).attr("user_id");
 

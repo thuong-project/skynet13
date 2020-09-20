@@ -22,13 +22,13 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @pagy, @users = pagy(User.all)
+    @pagy, @users = pagy(User.all, items:20)
   end
 
   # GET /users/1
   # GET /users/1.json
   def show
-    
+    @pagy, @posts = pagy(@user.posts)
   end
 
   

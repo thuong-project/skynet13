@@ -1,6 +1,6 @@
 <div class="container">
-  <div class="row">
-    <div class="col" user_id="<%= @user.id %>">
+  
+    <div class="" user_id="<%= @user.id %>">
       <div>
         <h2 class="d-inline">Profile</h2>
         <%if @user == current_user %>
@@ -50,11 +50,11 @@
       <div class="mt-5" id="follow">
       </div>
     </div>
-    <div class="col">
+    <div class="">
       <h2>Posteds</h2>
       <div id="list_posts">
         <%= render 'posts/list_posts' %>
       </div>
     </div>
-  </div>
+  
 </div>

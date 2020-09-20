@@ -1,2 +1,5 @@
-$("#list_posts").html("<%= escape_javascript(render(partial: 'posts/list_posts'))%>");
+<% html =  escape_javascript(render(partial: 'posts/list_posts'))%>
+$("#list_posts").html("<%= html %>");
+<% title="<h2>Posteds</h2>".html_safe %>
+$("[markup-posts]").html("<%= title %> <%= html%>");
 
