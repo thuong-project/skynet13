@@ -17,8 +17,36 @@ function formatDateTime(date) {
 }
 
 document.addEventListener("turbolinks:load", function () {
+  let current_user_id = $("#current-user").attr("data-user-id");
 
-  
+  consumer.subscriptions.create(
+    {
+      channel: "MessNoticeChannel",
+
+    },
+    {
+      received: function (data) {
+        console.log("data notice",data);
+        let notices = data.notices;
+        renderMessNotice(notices);
+      },
+    }
+  );
+
+  function renderMessNotice(notices){
+    notices.forEach(function(notice){
+      let key = Object.keys(notice)[0];
+      let value = notice[key];
+      let e = $(`.chat-bar li[user_id='${key}']`);
+      if(value > 0)
+        e.append(
+          `<span class="mess-notice">${value}</span>`
+        )
+      else {
+        e.find("span.mess-notice").remove();
+      }
+    })
+  }
 
   $("#chat-bar li").click(function () {
     const recipient_id = $(this).attr("user_id");
@@ -232,7 +260,7 @@ document.addEventListener("turbolinks:load", function () {
 
   function cancel(element) {
     $(element).off();
-    $(element).one("click",(function () {
+    $(element).one("click", function () {
       let current = $(this).attr("current-target");
       let incoming = $(this).attr("incoming-target");
       let cancel = `<button class="btn btn-danger" 
@@ -251,7 +279,7 @@ document.addEventListener("turbolinks:load", function () {
       console.log(current);
       $(current).hide();
       $(cancelE).insertAfter($(current));
-    }));
+    });
   }
   cancel("[name='edit']");
 
@@ -262,8 +290,8 @@ document.addEventListener("turbolinks:load", function () {
           /* One or more children have been added to and/or removed
              from the tree.
              (See mutation.addedNodes and mutation.removedNodes.) */
-            console.log("modify tree");
-            cancel("[name='edit']");
+          console.log("modify tree");
+          cancel("[name='edit']");
           break;
         case "attributes":
           /* An attribute value changed on the element in

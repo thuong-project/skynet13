@@ -45,6 +45,8 @@ gem 'faker'
 
 gem 'pg'
 
+gem "aws-sdk-s3", require: false
+
 
 # For 6.0.0 or higher
 
