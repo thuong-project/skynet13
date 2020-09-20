@@ -14,7 +14,7 @@ class ConversationsController < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
+  
   def set_conversation
     @recipient = User.find(params[:recipient_id])
     @conversation = Conversation.get(current_user.id, params[:recipient_id])

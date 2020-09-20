@@ -5,6 +5,13 @@ class ConversationChannel < ApplicationCable::Channel
   def subscribed
     setting()
 
+    @conversation.set_status(current_user.id, true)
+    @conversation.set_read(current_user.id)
+    ActionCable.server.broadcast(
+      "mess_notice_#{current_user.id}",
+      {notices: [{@opposed_user.id => 0}]}
+    )
+
     stream_from(@channel)
 
 
@@ -21,7 +28,7 @@ class ConversationChannel < ApplicationCable::Channel
   end
 
   def unsubscribed
-    
+    @conversation.set_status(current_user.id, false)
   end
 
   def receive(payload)
@@ -29,13 +36,22 @@ class ConversationChannel < ApplicationCable::Channel
     data_send = {}
 
     if payload['type'] === 'new_mess'
+
+      unless @conversation.user_active?(@opposed_user.id)
+        count = @conversation.add_unread(@opposed_user.id)
+        ActionCable.server.broadcast(
+          "mess_notice_#{@opposed_user.id}",
+          {notices: [{current_user.id => count}]}
+        )
+      end
+
       new_mess = @conversation.messages.create(user_id: current_user.id, body: payload['message'])
       array_mess = [new_mess]
       data_send['type'] = 'new_mess'
       data_send['content'] = array_mess.to_json
     elsif payload['type'] === 'typing'
       payload['sender'] = current_user.to_json
-      payload['recipient'] = @conversation.recipient.to_json
+      payload['recipient'] = @opposed_user.to_json
       data_send = payload
     end
 
@@ -48,10 +64,11 @@ class ConversationChannel < ApplicationCable::Channel
   private
 
   def setting
-    @conversation = Conversation.includes(:sender, :recipient).find(params[:conversation_id])
+    @conversation = Conversation.includes(:user1, :user2).find(params[:conversation_id])
+    @opposed_user = @conversation.opposed_user(current_user)
 
-    return unless current_user.id == @conversation.sender_id ||
-                  current_user.id == @conversation.recipient_id
+    return unless current_user.id == @conversation.user1_id ||
+                  current_user.id == @conversation.user2_id
 
     @channel = "conversation_#{@conversation.id}"
   end

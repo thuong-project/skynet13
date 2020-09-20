@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_23_071338) do
+ActiveRecord::Schema.define(version: 2020_09_20_150056) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,13 +47,17 @@ ActiveRecord::Schema.define(version: 2020_08_23_071338) do
   end
 
   create_table "conversations", force: :cascade do |t|
-    t.integer "sender_id"
-    t.integer "recipient_id"
+    t.integer "user1_id"
+    t.integer "user2_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["recipient_id"], name: "index_conversations_on_recipient_id"
-    t.index ["sender_id", "recipient_id"], name: "index_conversations_on_sender_id_and_recipient_id", unique: true
-    t.index ["sender_id"], name: "index_conversations_on_sender_id"
+    t.boolean "user1_status", default: false
+    t.boolean "user2_status", default: false
+    t.integer "user1_unread", default: 0
+    t.integer "user2_unread", default: 0
+    t.index ["user1_id", "user2_id"], name: "index_conversations_on_user1_id_and_user2_id", unique: true
+    t.index ["user1_id"], name: "index_conversations_on_user1_id"
+    t.index ["user2_id"], name: "index_conversations_on_user2_id"
   end
 
   create_table "likes", force: :cascade do |t|
