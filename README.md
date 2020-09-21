@@ -1,6 +1,9 @@
 ## 1.Introduce
 This is a simple social network website built with Ruby on Rails 6 and deployed to heroku  
-Link demo: https://skynet13.herokuapp.com/login
+Link demo: https://skynet13.herokuapp.com/login  
+Account for demo: 
+- username: 1ckpvthuongft@gmail.com, 2ckpvthuongft@gmail.com
+- password: 111111
 ## 2.Features
 ***Current***  
 1. **Authentication features**
