@@ -1,5 +1,5 @@
 ## 1.Introduce
-This is a simple social network website built Ruby on Rails 6 and deployed to heroku  
+This is a simple social network website built with Ruby on Rails 6 and deployed to heroku  
 Link demo: https://skynet13.herokuapp.com/login
 ## 2.Features
 ***Current***  
