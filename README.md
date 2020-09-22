@@ -33,8 +33,6 @@ Account for demo:
 `sudo docker-compose build`  
 `sudo docker-compose run web bundle install`  
 `sudo docker-compose run web yarn install --checkfiles`  
-`sudo docker-compose up`  
-`Ctrl C`  
-`sudo docker-compose run web rails db:rmks seed=full`  
-`sudo docker-compose up`  
-#### 2. If you want to deploy , set environment variable in .env file
+`sudo docker-compose run web rails db:rmks seed=full`   
+`sudo docker-compose up`
+#### 2. If you want to deploy , rename file `.env-config` to `.env` and set value for variables
