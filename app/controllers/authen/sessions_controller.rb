@@ -11,7 +11,7 @@ class Authen::SessionsController < Devise::SessionsController
     def after_sign_in_path_for(_resource)
       
       current_user.update(online: true)
-      root_path
+      newsfeed_path
     end
 
     def after_sign_out_path_for(_resource)

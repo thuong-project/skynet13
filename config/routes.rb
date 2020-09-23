@@ -2,7 +2,7 @@
 
 Rails.application.routes.draw do
   scope '(:locale)', locale: /#{I18n.available_locales.join("|")}/ do
-    root '/newsfeed'
+    root 'users#newsfeed'
 
     resources :users do
       get 'search', action: :search, on: :collection
