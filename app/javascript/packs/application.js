@@ -110,11 +110,7 @@ document.addEventListener("turbolinks:load", function () {
 
       //support function
       function createConversationChannel(chatBoxElement, conversation_id) {
-<<<<<<< HEAD
         var sub = subscriptions.create(
-=======
-        var sub = consumer.subscriptions.create(
->>>>>>> stable
           {
             channel: "ConversationChannel",
             conversation_id: conversation_id,
@@ -308,7 +304,6 @@ document.addEventListener("turbolinks:load", function () {
   const observer = new MutationObserver(observerCallback);
   observer.observe(targetNode, observerOptions);
 });
-<<<<<<< HEAD
 
 function renderMessNotice(notices){
   notices.forEach(function(notice){
@@ -324,5 +319,3 @@ function renderMessNotice(notices){
     }
   })
 }
-=======
->>>>>>> stable
