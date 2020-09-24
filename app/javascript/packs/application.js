@@ -8,45 +8,34 @@ require("@rails/activestorage").start();
 require("channels");
 window.$ = $;
 import "bootstrap";
-
 import consumer from "../channels/consumer";
-var moment = require("moment-timezone");
 
+let moment = require("moment-timezone");
 function formatDateTime(date) {
   return moment(date).utcOffset("+07:00").locale("en").calendar();
 }
 
+
+let subscriptions = consumer.subscriptions;
+let noticeSub = subscriptions.create(
+  {
+    channel: "MessNoticeChannel",
+
+  },
+  {
+    received: function (data) {
+      console.log("data notice",data);
+      let notices = data.notices;
+      renderMessNotice(notices);
+    },
+  }
+);
+
 document.addEventListener("turbolinks:load", function () {
+  console.log("turbolinks load")
   let current_user_id = $("#current-user").attr("data-user-id");
 
-  consumer.subscriptions.create(
-    {
-      channel: "MessNoticeChannel",
-
-    },
-    {
-      received: function (data) {
-        console.log("data notice",data);
-        let notices = data.notices;
-        renderMessNotice(notices);
-      },
-    }
-  );
-
-  function renderMessNotice(notices){
-    notices.forEach(function(notice){
-      let key = Object.keys(notice)[0];
-      let value = notice[key];
-      let e = $(`.chat-bar li[user_id='${key}']`);
-      if(value > 0)
-        e.append(
-          `<span class="mess-notice">${value}</span>`
-        )
-      else {
-        e.find("span.mess-notice").remove();
-      }
-    })
-  }
+  noticeSub.perform("subscribed")
 
   $("#chat-bar li").click(function () {
     const recipient_id = $(this).attr("user_id");
@@ -121,7 +110,7 @@ document.addEventListener("turbolinks:load", function () {
 
       //support function
       function createConversationChannel(chatBoxElement, conversation_id) {
-        var sub = consumer.subscriptions.create(
+        var sub = subscriptions.create(
           {
             channel: "ConversationChannel",
             conversation_id: conversation_id,
@@ -315,3 +304,18 @@ document.addEventListener("turbolinks:load", function () {
   const observer = new MutationObserver(observerCallback);
   observer.observe(targetNode, observerOptions);
 });
+
+function renderMessNotice(notices){
+  notices.forEach(function(notice){
+    let key = Object.keys(notice)[0];
+    let value = notice[key];
+    let e = $(`.chat-bar li[user_id='${key}']`);
+    if(value > 0)
+      e.append(
+        `<span class="mess-notice">${value}</span>`
+      )
+    else {
+      e.find("span.mess-notice").remove();
+    }
+  })
+}
