@@ -4,4 +4,4 @@ production:
     - gem install dpl
     - dpl --provider=heroku --app=skynet13 --api-key=$HEROKU_API_KEY
   only:
-    - master
+    - deploy
