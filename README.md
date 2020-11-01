@@ -30,9 +30,7 @@ Account for demo:
 - Storage: Amazon S3
 ## 4. Usage
 #### 1. Install
-`sudo docker-compose build`  
-`sudo docker-compose run web bundle install`  
-`sudo docker-compose run web yarn install --checkfiles`  
+`sudo docker-compose build`     
 `sudo docker-compose run web rails db:rmks seed=full`   
 `sudo docker-compose up`
 #### 2. If you want to deploy , rename file `.env-config` to `.env` and set value for variables
